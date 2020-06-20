@@ -5,5 +5,5 @@
 ```bash
 # If you're running Windows
 $env:GITHUB_TOKEN="GITHUB_TOKEN"
-npm run develop
+npm run start
 ```
