@@ -10,7 +10,10 @@ const Bio = () => {
       avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
         childImageSharp {
           fixed(width: 50, height: 50,quality: 100) {
-            ...GatsbyImageSharpFixed
+            ...GatsbyImageSharpFixed_noBase64
+          }
+          blurHash(height: 50,width: 50,componentX: 3,componentY:3) {
+            base64Image
           }
         }
       }
@@ -25,6 +28,8 @@ const Bio = () => {
       }
     }
   `)
+  
+  console.log(data)
 
   const { author, description, social } = data.site.siteMetadata
   return (
@@ -35,7 +40,10 @@ const Bio = () => {
       }}
     >
       <Image
-        fixed={data.avatar.childImageSharp.fixed}
+        fixed={{
+          ...data.avatar.childImageSharp.fixed,
+          base64: data.avatar.childImageSharp.blurHash.base64Image
+        }}
         alt={author.name}
         style={{
           marginRight: rhythm(1 / 2),
