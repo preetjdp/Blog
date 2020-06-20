@@ -5,41 +5,54 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
+import { formatCreatedDate } from "../utils/helpers"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
-  const posts = data.allMarkdownRemark.edges
+  console.log(data)
+  // const posts = data.allMarkdownRemark.edges
+  const posts = data.github.viewer.repository.issues.nodes
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
+      {/* <aside> */}
       <Bio />
-      {posts.map(({ node }) => {
-        const title = node.frontmatter.title || node.fields.slug
+      {/* </aside> */}
+      {/* <main> */}
+      {posts.map((node) => {
+        console.log(node)
+        const title = node.title
         return (
-          <article key={node.fields.slug}>
+          <article key={node.id}>
             <header>
               <h3
                 style={{
+                  fontFamily: 'Montserrat, sans-serif',
+                  fontSize: rhythm(1),
                   marginBottom: rhythm(1 / 4),
                 }}
               >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                <Link style={{ boxShadow: `none` }} to={node.id} rel="bookmark">
                   {title}
                 </Link>
               </h3>
-              <small>{node.frontmatter.date}</small>
+              <small>
+                {formatCreatedDate(node.createdAt)}
+                {/* {` • ${formatReadingTime(node.timeToRead)}`} */}
+              </small>
             </header>
-            <section>
+            {/* <section>
               <p
                 dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
+                  __html: node.bodyHTML,
                 }}
               />
-            </section>
+            </section> */}
           </article>
         )
       })}
+      {/* </main> */}
     </Layout>
   )
 }
@@ -64,6 +77,22 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             title
             description
+          }
+        }
+      }
+    }
+    github {
+      viewer {
+        repository(name: "Blog") {
+          issues(first: 20) {
+            nodes {
+              id
+              number
+              title
+              resourcePath
+              createdAt  
+              bodyHTML
+            }
           }
         }
       }
