@@ -28,8 +28,6 @@ const Bio = () => {
       }
     }
   `)
-  
-  console.log(data)
 
   const { author, description, social } = data.site.siteMetadata
   return (
