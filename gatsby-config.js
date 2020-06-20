@@ -6,6 +6,7 @@ module.exports = {
     siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
     social: {
       twitter: `TmPreet`,
+      mail: `preetjdpdev@gmail.com`
     },
   },
   plugins: [
@@ -68,6 +69,17 @@ module.exports = {
       },
     },
     `@m5r/gatsby-transformer-blurhash`,
+    {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        typeName: `Github`,
+        fieldName: `github`,
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
+        },
+        url: `https://api.github.com/graphql`
+      }
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
