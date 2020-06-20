@@ -6,12 +6,13 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 import { formatCreatedDate } from "../utils/helpers"
+import { Post, mapNodeToPost } from "../utils/mapPost"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
   console.log(data)
   // const posts = data.allMarkdownRemark.edges
-  const posts = data.github.viewer.repository.issues.nodes
+  const posts: Array<Post> = data.github.viewer.repository.issues.nodes.map((e: any) => mapNodeToPost(e));
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -20,11 +21,10 @@ const BlogIndex = ({ data, location }) => {
       <Bio />
       {/* </aside> */}
       {/* <main> */}
-      {posts.map((node) => {
-        console.log(node)
-        const title = node.title
+      {posts.map((post) => {
+        console.log(post.id)
         return (
-          <article key={node.id}>
+          <article key={post.id}>
             <header>
               <h3
                 style={{
@@ -33,12 +33,12 @@ const BlogIndex = ({ data, location }) => {
                   marginBottom: rhythm(1 / 4),
                 }}
               >
-                <Link style={{ boxShadow: `none` }} to={node.id} rel="bookmark">
-                  {title}
+                <Link style={{ boxShadow: `none` }} to={post.id} rel="bookmark">
+                  {post.title}
                 </Link>
               </h3>
               <small>
-                {formatCreatedDate(node.createdAt)}
+                {post.createAtPretty}
                 {/* {` • ${formatReadingTime(node.timeToRead)}`} */}
               </small>
             </header>
