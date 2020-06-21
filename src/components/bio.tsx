@@ -55,7 +55,7 @@ const Bio = () => {
       />
       <p style={{ maxWidth: 310 }}>
         {description} by{' '}
-        <a href="https://mobile.twitter.com/dan_abramov">{author}</a>.{' '}
+        <a href={`https://twitter.com/${social.twitter}`}>{author}</a>.{' '}
         I&nbsp;explain with words and code.
       </p>
     </div>
