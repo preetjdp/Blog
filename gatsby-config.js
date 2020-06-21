@@ -8,6 +8,7 @@ module.exports = {
       twitter: `TmPreet`,
       mail: `preetjdpdev@gmail.com`
     },
+    repoName: `Blog`
   },
   plugins: [
     {
