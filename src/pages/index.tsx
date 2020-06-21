@@ -10,7 +10,6 @@ import { Post, mapNodeToPost } from "../utils/mapPost"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
-  console.log(data)
   // const posts = data.allMarkdownRemark.edges
   const posts: Array<Post> = data.github.viewer.repository.issues.nodes.map((e: any) => mapNodeToPost(e));
 
@@ -22,7 +21,6 @@ const BlogIndex = ({ data, location }) => {
       {/* </aside> */}
       {/* <main> */}
       {posts.map((post) => {
-        console.log(post.id)
         return (
           <article key={post.id}>
             <header>

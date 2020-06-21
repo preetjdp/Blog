@@ -38,7 +38,6 @@ const SEO = ({ description, meta, title }) => {
 
   const metaDescription = description || site.siteMetadata.description
 
-  console.log(icon)
 
   return (
     <Helmet
