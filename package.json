@@ -7,6 +7,7 @@
   "dependencies": {
     "@m5r/gatsby-transformer-blurhash": "github:m5r/gatsby-transformer-blurhash#master",
     "@types/node": "^14.0.13",
+    "@types/react-helmet": "^6.0.0",
     "gatsby": "^2.23.7",
     "gatsby-image": "^2.4.7",
     "gatsby-plugin-manifest": "^2.4.12",
