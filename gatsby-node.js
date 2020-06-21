@@ -37,15 +37,11 @@ exports.createPages = async ({ graphql, actions }) => {
   const posts = result.data.github.viewer.repository.issues.nodes
 
   posts.forEach((post, index) => {
-    const previous = index === posts.length - 1 ? null : posts[index + 1].node
-    const next = index === 0 ? null : posts[index - 1].node
     createPage({
       path: post.number.toString(),
       component: blogPost,
       context: {
-        slug: post.number,
-        previous,
-        next,
+        slug: post.number
       },
     })
   })
@@ -55,6 +51,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
+    console.log("SBHBK")
     const value = createFilePath({ node, getNode })
     createNodeField({
       name: `slug`,
