@@ -11,7 +11,7 @@ exports.createPages = async ({ graphql, actions }) => {
         github {
           viewer {
             repository(name: "Blog") {
-              issues(first: 20) {
+              issues(first: 20, labels: ["Blog"]) {
                 nodes {
                   id
                   number
