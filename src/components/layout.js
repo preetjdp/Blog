@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import Toggle from './Toggle';
+import { Toggle } from './Toggle';
 import Helmet from 'react-helmet';
 
 import { rhythm, scale } from '../utils/typography';
@@ -134,8 +134,8 @@ class Layout extends React.Component {
                 }
               />
             ) : (
-              <div style={{ height: '24px' }} />
-            )}
+                <div style={{ height: '24px' }} />
+              )}
           </header>
           {children}
         </div>
