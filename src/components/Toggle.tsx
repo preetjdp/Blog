@@ -9,6 +9,7 @@ import './Toggle.css';
 import React, { MouseEvent, TouchEvent, FocusEvent } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import useSound from "use-sound"
+import { useHotkeys } from "react-hotkeys-hook"
 
 // Copyright 2015-present Drifty Co.
 // http://drifty.com/
@@ -57,6 +58,21 @@ const Toggle = props => {
       }
     }    
   `)
+
+  useHotkeys('alt+t', () => {
+    const checkbox = inputRef.current;
+    if (checkbox === undefined) {
+      return
+    }
+    instanceStateRef.current.previouslyChecked = checkbox.checked;
+    // if (event.target !== checkbox && !instanceStateRef.current.moved) {
+      // event.preventDefault();
+      // checkbox.focus();
+      checkbox.click();
+      // checkbox.unfocus()
+      return;
+    // }
+  })
 
   const [switchOn] = useSound(switchOnSound.publicURL, {
     volume: 0.5
