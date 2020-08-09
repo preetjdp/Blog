@@ -7,6 +7,8 @@ import { rhythm, scale } from '../utils/typography';
 import sun from '../assets/sun.png';
 import moon from '../assets/moon.png';
 
+import Footer from "./footer"
+
 class Layout extends React.Component {
   state = {
     theme: null,
@@ -138,6 +140,7 @@ class Layout extends React.Component {
               )}
           </header>
           {children}
+          <Footer/>
         </div>
       </div>
     );
