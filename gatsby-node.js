@@ -48,14 +48,59 @@ exports.createPages = async ({ graphql, actions }) => {
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
+  //   const { createNodeField } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
-    })
+  //   if (node.internal.type === `MarkdownRemark`) {
+  //     const value = createFilePath({ node, getNode })
+  //     createNodeField({
+  //       name: `slug`,
+  //       node,
+  //       value,
+  //     })
+  //   }
+  // }
+
+  // exports.createSchemaCustomization = ({ actions }) => {
+  //   const { createFieldExtension, createTypes } = actions
+  //   createFieldExtension({
+  //     name: 'md',
+  //     extend(options, prevFieldConfig) {
+  //       return {
+  //         type: 'String',
+  //         resolve(source, args, context, info) {
+  //           // const fieldValue = context.defaultFieldResolver(
+  //           //   source,
+  //           //   args,
+  //           //   context,
+  //           //   info
+  //           // )
+  //           return 'Maybe tomorrow.'
+  //         },
+  //       }
+  //     },
+  //   })
+  //   createTypes(`
+  //     type BlogPost implements Node {
+  //       content: String @md
+  //     }
+  //   `)
+}
+
+exports.createResolvers = ({ createResolvers }) => {
+  const resolvers = {
+    Github_Issue: {
+      customHTML: {
+        type: "String",
+        resolve(source, args, context, info) {
+          // console.log(source, args, context, info)
+          return "wowza"
+          // return context.nodeModel.getNodeById({
+          //   id: source.author,
+          //   type: "AuthorJson",
+          // })
+        },
+      },
+    },
   }
+  createResolvers(resolvers)
 }
