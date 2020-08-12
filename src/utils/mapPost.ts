@@ -7,7 +7,8 @@ export const mapNodeToPost = (node: any): Post => {
         createdAt: node.createdAt,
         createAtPretty: formatCreatedDate(node.createdAt),
         body: node.body,
-        bodyHTML: node.bodyHTML
+        bodyHTML: node.bodyHTML,
+        customHTML: node.customHTML
     }
 }
 
@@ -17,5 +18,6 @@ export type Post = {
     createdAt: string,
     createAtPretty: string,
     body: string,
-    bodyHTML: string
+    bodyHTML: string,
+    customHTML: string
 }

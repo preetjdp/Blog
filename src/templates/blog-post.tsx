@@ -37,7 +37,7 @@ const BlogPostTemplate = ({ data, location }: PageProps) => {
             {post.createAtPretty}
           </p>
         </header>
-        <section dangerouslySetInnerHTML={{ __html: post.bodyHTML }} />
+        <section dangerouslySetInnerHTML={{ __html: post.customHTML }} />
         <hr
           style={{
             marginBottom: rhythm(1),
@@ -71,6 +71,8 @@ export const pageQuery = graphql`
                 resourcePath
                 createdAt  
                 bodyHTML
+                body
+                customHTML
             }
         }
       }
