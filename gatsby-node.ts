@@ -2,7 +2,9 @@
 // const { createFilePath } = require(`gatsby-source-filesystem`)
 import path from "path"
 import { createFilePath } from "gatsby-source-filesystem"
-import { GatsbyNode, CreateResolversArgs, SourceNodesArgs } from "gatsby"
+import { GatsbyNode, CreateResolversArgs } from "gatsby"
+import remark from "remark"
+import remarkHtml from "remark-html"
 
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions }) => {
   const { createPage } = actions
@@ -68,11 +70,12 @@ export const createResolvers: GatsbyNode['createResolvers'] = async ({ createRes
     Github_Issue: {
       customHTML: {
         type: "String",
-        resolve(source) {
+        async resolve(source) {
           // console.log(source)
           let markdown = source.body
-          
-          return "wowza"
+          let processor = remark().use(remarkHtml)
+          let processed = await processor.process(markdown)
+          return processed.contents
           // return context.nodeModel.getNodeById({
           //   id: source.author,
           //   type: "AuthorJson",
