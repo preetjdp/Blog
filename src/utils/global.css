@@ -117,6 +117,10 @@ body {
   pre[class*='language-'] {
     overflow: auto;
     padding: 1.3125rem;
+    background: #011627;
+    display: block;
+    margin-right: -1.3125rem;
+    margin-left: -1.3125rem;
   }
   
   pre[class*='language-']::-moz-selection {
