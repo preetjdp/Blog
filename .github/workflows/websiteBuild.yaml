@@ -6,6 +6,9 @@ on:
       - master
   issues:
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   setup-build-deploy:
     name: Setup Build and Deploy
