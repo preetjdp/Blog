@@ -1,0 +1,21 @@
+name: "Website CI"
+
+on:
+  push:
+    branches:
+      - master
+  issues:
+
+jobs:
+  setup-build-deploy:
+    name: Setup Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build and Deploy to Netlify
+        uses: jsmrcaga/action-netlify-deploy@v1.1.0
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+          NETLIFY_DEPLOY_TO_PROD: true
+          build_directory: public
