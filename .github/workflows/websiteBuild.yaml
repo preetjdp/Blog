@@ -16,11 +16,11 @@ jobs:
       - uses: actions/setup-node@v2-beta
         with:
           node-version: "12"
-      # - name: Install Dependencies
-      #   run: |
-      #     rm package-lock.json;
-      #     rm -rf node_modules;
-      #     npm install;
+      - name: Install Dependencies
+        run: |
+          # rm package-lock.json;
+          # rm -rf node_modules;
+          npm install;
       - name: Build and Deploy to Netlify
         uses: jsmrcaga/action-netlify-deploy@v1.1.0
         with:
