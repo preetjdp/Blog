@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "strictNullChecks": true,
         "esModuleInterop": true,
+        
         "jsx": "react",
         "types": [
             "node",

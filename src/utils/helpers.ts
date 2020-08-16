@@ -1,3 +1,5 @@
+import { useStaticQuery, graphql } from "gatsby"
+
 export function formatReadingTime(minutes: number): string {
     let cups = Math.round(minutes / 5);
     let bowls = 0;
@@ -14,3 +16,9 @@ export function formatCreatedDate(date: string): string {
     let _date = new Date(date);
     return _date.toLocaleDateString("en", { day: 'numeric', month: 'long', year: 'numeric' },)
 }
+
+// type siteMetadata = {
+//     title: string
+//     siteUrl: string
+//     description: string
+// }
