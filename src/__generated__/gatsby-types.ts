@@ -19620,6 +19620,16 @@ type StringQueryOperatorInput = {
   readonly glob: Maybe<Scalars['String']>;
 };
 
+type BlogPostBySlugQueryVariables = Exact<{
+  slug: Scalars['Int'];
+}>;
+
+
+type BlogPostBySlugQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly github: { readonly viewer: { readonly repository: Maybe<(
+        Pick<Github_Repository, 'name'>
+        & { readonly issue: Maybe<Pick<Github_Issue, 'id' | 'number' | 'title' | 'resourcePath' | 'createdAt' | 'bodyHTML' | 'body' | 'customHTML'>> }
+      )> } } };
+
 type StaticBlogPostBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
