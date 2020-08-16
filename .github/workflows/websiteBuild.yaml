@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: "12"
       - name: Install Dependencies
-        run: npm Install
+        run: npm install
       - name: Build Gatsby Website
         run: npm run build
       - name: Deploy to Netlify
