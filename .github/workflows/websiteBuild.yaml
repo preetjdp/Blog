@@ -7,7 +7,7 @@ on:
   issues:
 
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_TOKEN: d4276ad3fc3c31624108f89345b90104a975f641
 
 jobs:
   setup-build-deploy:
