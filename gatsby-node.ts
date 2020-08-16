@@ -12,12 +12,17 @@ import remark2rehype from "remark-rehype"
 import rehypeHtml from "rehype-stringify"
 import rehypePrism from "rehype-prism"
 
+type resultReturnType = {
+  github: GatsbyTypes.Github
+  allMarkdownRemark: GatsbyTypes.MarkdownRemarkConnection
+}
+
 export const createPages = async ({ graphql, actions }: CreatePagesArgs) => {
   const { createPage } = actions
 
   const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
   const staticBlogPost = path.resolve(`./src/templates/static-post.tsx`)
-  const result = await graphql(
+  const result = await graphql<resultReturnType>(
     `
     {
       github {
@@ -48,27 +53,29 @@ export const createPages = async ({ graphql, actions }: CreatePagesArgs) => {
     throw result.errors
   }
 
-  // const { ghPosts, staticPosts } = (result as any).data
+  if (result.data == undefined) return
 
-  const ghPosts = (result as any).data.github.viewer.repository.issues.nodes
-  const staticPosts = (result as any).data.allMarkdownRemark.edges;
+  const { github, allMarkdownRemark } = result.data
 
-  ghPosts.forEach((post, _: number) => {
+  const ghPosts = github.viewer.repository!.issues.nodes
+  const staticPosts = allMarkdownRemark.edges;
+
+  ghPosts!.forEach((post, _: number) => {
     createPage({
-      path: post.number.toString(),
+      path: post!.number.toString(),
       component: blogPost,
       context: {
-        slug: post.number
+        slug: post!.number
       },
     })
   })
 
   staticPosts.forEach((post, _: number) => {
     createPage({
-      path: post.node.fields.slug,
+      path: post!.node!.fields!.slug!,
       component: staticBlogPost,
       context: {
-        slug: post.node.fields.slug
+        slug: post!.node!.fields!.slug!
       },
     })
   })
