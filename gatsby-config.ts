@@ -77,7 +77,8 @@ export default {
         typeName: `Github`,
         fieldName: `github`,
         headers: {
-          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
+          // Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
+          Authorization: `Bearer d4276ad3fc3c31624108f89345b90104a975f641`
         },
         url: `https://api.github.com/graphql`
       }
