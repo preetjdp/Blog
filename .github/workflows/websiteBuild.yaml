@@ -16,6 +16,8 @@ jobs:
       - uses: actions/setup-node@v2-beta
         with:
           node-version: "12"
+      - name: Test
+        run: env
       - name: Install Dependencies
         run: npm install
       - name: Build Gatsby Website
