@@ -221,7 +221,7 @@ const Toggle = props => {
         onBlur={handleBlur}
         className="react-toggle-screenreader-only"
         type="checkbox"
-        aria-label="Switch between Dark and Light mode"
+        alt="Switch between Dark and Light mode"
       />
     </div>
   );
