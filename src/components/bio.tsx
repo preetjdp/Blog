@@ -5,7 +5,7 @@ import Image from "gatsby-image"
 import { rhythm } from "../utils/typography"
 
 const Bio = () => {
-  const data = useStaticQuery(graphql`
+  const data = useStaticQuery<GatsbyTypes.BioQueryQuery>(graphql`
     query BioQuery {
       avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
         childImageSharp {
@@ -29,7 +29,7 @@ const Bio = () => {
     }
   `)
 
-  const { author, description, social } = data.site.siteMetadata
+  const { author, description, social } = data!.site!.siteMetadata!
   return (
     <div
       style={{
@@ -39,10 +39,10 @@ const Bio = () => {
     >
       <Image
         fixed={{
-          ...data.avatar.childImageSharp.fixed,
-          base64: data.avatar.childImageSharp.blurHash.base64Image
+          ...data!.avatar!.childImageSharp!.fixed!,
+          base64: data!.avatar!.childImageSharp!.blurHash!.base64Image!
         }}
-        alt={author.name}
+        alt={author!}
         style={{
           marginRight: rhythm(1 / 2),
           marginBottom: 0,
@@ -55,7 +55,7 @@ const Bio = () => {
       />
       <p style={{ maxWidth: 310 }}>
         {description} by{' '}
-        <a href={`https://twitter.com/${social.twitter}`}>{author}</a>.{' '}
+        <a href={`https://twitter.com/${social!.twitter}`}>{author}</a>.{' '}
         I&nbsp;explain with words and code.
       </p>
     </div>

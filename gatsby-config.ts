@@ -11,6 +11,7 @@ export default {
     repoName: `Blog`
   },
   plugins: [
+    `gatsby-plugin-typegen`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
