@@ -17,14 +17,15 @@ jobs:
         with:
           node-version: "12"
       - name: Install Dependencies
-        run: |
-          # rm package-lock.json;
-          # rm -rf node_modules;
-          npm install;
-      - name: Build and Deploy to Netlify
+        run: npm Install
+      - name: Build Gatsby Website
+        run: npm run build
+      - name: Deploy to Netlify
         uses: jsmrcaga/action-netlify-deploy@v1.1.0
         with:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          production-branch: master
+          publish-dir: "./public"
+          deploy-message: "Deploy from GitHub Actions"
+        env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
-          NETLIFY_DEPLOY_TO_PROD: true
-          build_directory: public
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
