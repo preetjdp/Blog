@@ -77,7 +77,7 @@ export default {
         typeName: `Github`,
         fieldName: `github`,
         headers: {
-          Authorization: `Bearer c8db5d8102477ad0a6604115e0c6b577b8556e4f`
+          Authorization: `bearer c8db5d8102477ad0a6604115e0c6b577b8556e4f`
         },
         url: `https://api.github.com/graphql`,
         // createSchema: async () => {
