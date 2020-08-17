@@ -79,7 +79,11 @@ export default {
         headers: {
           Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
         },
-        url: `https://api.github.com/graphql`
+        url: `https://api.github.com/graphql`,
+        // createSchema: async () => {
+        //   const sdl = fs.readFileSync(`${__dirname}/schema.sdl`).toString()
+        //   return buildSchema(sdl)
+        // },
       }
     }
     // this (optional) plugin enables Progressive Web App + Offline functionality

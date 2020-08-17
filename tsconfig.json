@@ -3,10 +3,10 @@
         "noImplicitAny": false,
         "strictNullChecks": true,
         "esModuleInterop": true,
-        
+        "lib": ["ES6"],
         "jsx": "react",
         "types": [
-            "node",
+            "node"
         ]
     }
 }
