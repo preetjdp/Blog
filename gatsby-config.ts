@@ -1,3 +1,5 @@
+import { buildSchema } from "graphql"
+import fs from "fs"
 export default {
   siteMetadata: {
     title: `Blog`,
@@ -11,7 +13,31 @@ export default {
     repoName: `Blog`
   },
   plugins: [
+    {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        typeName: `Github`,
+        fieldName: `github`,
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
+        },
+        url: `https://api.github.com/graphql`,
+        // createSchema: async () => {
+        //   const sdl = fs.readFileSync(`${__dirname}/src/assets/github.schema.sdl`).toString()
+        //   return buildSchema(sdl)
+        // },
+      }
+    },
     `gatsby-plugin-typegen`,
+    // {
+    //   resolve: `gatsby-plugin-typegen`,
+    //   options: {
+    //     emitSchema: {
+    //       'src/__generated__/gatsby-schema.graphql': true,
+    //       'src/__generated__/gatsby-introspection.json': true,
+    //     },
+    //   },
+    // },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -70,22 +96,7 @@ export default {
         pathToConfigModule: `src/utils/typography`,
       },
     },
-    `@m5r/gatsby-transformer-blurhash`,
-    {
-      resolve: `gatsby-source-graphql`,
-      options: {
-        typeName: `Github`,
-        fieldName: `github`,
-        headers: {
-          Authorization: `bearer c8db5d8102477ad0a6604115e0c6b577b8556e4f`
-        },
-        url: `https://api.github.com/graphql`,
-        // createSchema: async () => {
-        //   const sdl = fs.readFileSync(`${__dirname}/schema.sdl`).toString()
-        //   return buildSchema(sdl)
-        // },
-      }
-    }
+    `@m5r/gatsby-transformer-blurhash`
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

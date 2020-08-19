@@ -13,7 +13,7 @@ import rehypeHtml from "rehype-stringify"
 import rehypePrism from "rehype-prism"
 
 type resultReturnType = {
-  github: GatsbyTypes.Github
+  github: any
   allMarkdownRemark: GatsbyTypes.MarkdownRemarkConnection
 }
 

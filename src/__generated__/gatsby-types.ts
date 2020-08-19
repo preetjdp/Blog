@@ -19124,6 +19124,10 @@ enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___plugins___version = 'pluginCreator.pluginOptions.plugins.version',
   pluginCreator___pluginOptions___plugins___browserAPIs = 'pluginCreator.pluginOptions.plugins.browserAPIs',
   pluginCreator___pluginOptions___plugins___pluginFilepath = 'pluginCreator.pluginOptions.plugins.pluginFilepath',
+  pluginCreator___pluginOptions___typeName = 'pluginCreator.pluginOptions.typeName',
+  pluginCreator___pluginOptions___fieldName = 'pluginCreator.pluginOptions.fieldName',
+  pluginCreator___pluginOptions___headers___Authorization = 'pluginCreator.pluginOptions.headers.Authorization',
+  pluginCreator___pluginOptions___url = 'pluginCreator.pluginOptions.url',
   pluginCreator___pluginOptions___path = 'pluginCreator.pluginOptions.path',
   pluginCreator___pluginOptions___name = 'pluginCreator.pluginOptions.name',
   pluginCreator___pluginOptions___maxWidth = 'pluginCreator.pluginOptions.maxWidth',
@@ -19140,10 +19144,6 @@ enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___legacy = 'pluginCreator.pluginOptions.legacy',
   pluginCreator___pluginOptions___cacheDigest = 'pluginCreator.pluginOptions.cacheDigest',
   pluginCreator___pluginOptions___pathToConfigModule = 'pluginCreator.pluginOptions.pathToConfigModule',
-  pluginCreator___pluginOptions___typeName = 'pluginCreator.pluginOptions.typeName',
-  pluginCreator___pluginOptions___fieldName = 'pluginCreator.pluginOptions.fieldName',
-  pluginCreator___pluginOptions___headers___Authorization = 'pluginCreator.pluginOptions.headers.Authorization',
-  pluginCreator___pluginOptions___url = 'pluginCreator.pluginOptions.url',
   pluginCreator___pluginOptions___tsNode = 'pluginCreator.pluginOptions.tsNode',
   pluginCreator___pluginOptions___pathCheck = 'pluginCreator.pluginOptions.pathCheck',
   pluginCreator___nodeAPIs = 'pluginCreator.nodeAPIs',
@@ -19341,6 +19341,10 @@ enum SitePluginFieldsEnum {
   pluginOptions___plugins___pluginOptions___wrapperStyle = 'pluginOptions.plugins.pluginOptions.wrapperStyle',
   pluginOptions___plugins___browserAPIs = 'pluginOptions.plugins.browserAPIs',
   pluginOptions___plugins___pluginFilepath = 'pluginOptions.plugins.pluginFilepath',
+  pluginOptions___typeName = 'pluginOptions.typeName',
+  pluginOptions___fieldName = 'pluginOptions.fieldName',
+  pluginOptions___headers___Authorization = 'pluginOptions.headers.Authorization',
+  pluginOptions___url = 'pluginOptions.url',
   pluginOptions___path = 'pluginOptions.path',
   pluginOptions___name = 'pluginOptions.name',
   pluginOptions___maxWidth = 'pluginOptions.maxWidth',
@@ -19357,10 +19361,6 @@ enum SitePluginFieldsEnum {
   pluginOptions___legacy = 'pluginOptions.legacy',
   pluginOptions___cacheDigest = 'pluginOptions.cacheDigest',
   pluginOptions___pathToConfigModule = 'pluginOptions.pathToConfigModule',
-  pluginOptions___typeName = 'pluginOptions.typeName',
-  pluginOptions___fieldName = 'pluginOptions.fieldName',
-  pluginOptions___headers___Authorization = 'pluginOptions.headers.Authorization',
-  pluginOptions___url = 'pluginOptions.url',
   pluginOptions___tsNode = 'pluginOptions.tsNode',
   pluginOptions___pathCheck = 'pluginOptions.pathCheck',
   nodeAPIs = 'nodeAPIs',
@@ -19477,6 +19477,10 @@ type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 
 type SitePluginPluginOptions = {
   readonly plugins: Maybe<ReadonlyArray<Maybe<SitePluginPluginOptionsPlugins>>>;
+  readonly typeName: Maybe<Scalars['String']>;
+  readonly fieldName: Maybe<Scalars['String']>;
+  readonly headers: Maybe<SitePluginPluginOptionsHeaders>;
+  readonly url: Maybe<Scalars['String']>;
   readonly path: Maybe<Scalars['String']>;
   readonly name: Maybe<Scalars['String']>;
   readonly maxWidth: Maybe<Scalars['Int']>;
@@ -19493,16 +19497,16 @@ type SitePluginPluginOptions = {
   readonly legacy: Maybe<Scalars['Boolean']>;
   readonly cacheDigest: Maybe<Scalars['String']>;
   readonly pathToConfigModule: Maybe<Scalars['String']>;
-  readonly typeName: Maybe<Scalars['String']>;
-  readonly fieldName: Maybe<Scalars['String']>;
-  readonly headers: Maybe<SitePluginPluginOptionsHeaders>;
-  readonly url: Maybe<Scalars['String']>;
   readonly tsNode: Maybe<Scalars['Boolean']>;
   readonly pathCheck: Maybe<Scalars['Boolean']>;
 };
 
 type SitePluginPluginOptionsFilterInput = {
   readonly plugins: Maybe<SitePluginPluginOptionsPluginsFilterListInput>;
+  readonly typeName: Maybe<StringQueryOperatorInput>;
+  readonly fieldName: Maybe<StringQueryOperatorInput>;
+  readonly headers: Maybe<SitePluginPluginOptionsHeadersFilterInput>;
+  readonly url: Maybe<StringQueryOperatorInput>;
   readonly path: Maybe<StringQueryOperatorInput>;
   readonly name: Maybe<StringQueryOperatorInput>;
   readonly maxWidth: Maybe<IntQueryOperatorInput>;
@@ -19519,10 +19523,6 @@ type SitePluginPluginOptionsFilterInput = {
   readonly legacy: Maybe<BooleanQueryOperatorInput>;
   readonly cacheDigest: Maybe<StringQueryOperatorInput>;
   readonly pathToConfigModule: Maybe<StringQueryOperatorInput>;
-  readonly typeName: Maybe<StringQueryOperatorInput>;
-  readonly fieldName: Maybe<StringQueryOperatorInput>;
-  readonly headers: Maybe<SitePluginPluginOptionsHeadersFilterInput>;
-  readonly url: Maybe<StringQueryOperatorInput>;
   readonly tsNode: Maybe<BooleanQueryOperatorInput>;
   readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
 };
@@ -19643,25 +19643,20 @@ type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
 type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_2_Query = { readonly switchOnSound: Maybe<Pick<File, 'publicURL'>>, readonly switchOffSound: Maybe<Pick<File, 'publicURL'>> };
+type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
 type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_3_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
-
-type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_4_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
+type Unnamed_3_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
         Pick<MarkdownRemark, 'excerpt'>
         & { readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>>, readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'date' | 'title' | 'description'>> }
       ) }> }, readonly github: { readonly viewer: { readonly repository: Maybe<{ readonly issues: { readonly nodes: Maybe<ReadonlyArray<Maybe<Pick<Github_Issue, 'id' | 'number' | 'title' | 'resourcePath' | 'createdAt' | 'bodyHTML'>>>> } }> } } };
 
-type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
+type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_5_Query = { readonly site: Maybe<Pick<Site, 'buildTime'>> };
+type Unnamed_4_Query = { readonly site: Maybe<Pick<Site, 'buildTime'>> };
 
 type BlogPostBySlugQueryVariables = Exact<{
   slug: Scalars['Int'];
@@ -19682,6 +19677,11 @@ type StaticBlogPostBySlugQuery = { readonly site: Maybe<{ readonly siteMetadata:
     Pick<MarkdownRemark, 'id' | 'html' | 'timeToRead'>
     & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title' | 'date'>>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
   )> };
+
+type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_5_Query = { readonly switchOnSound: Maybe<Pick<File, 'publicURL'>>, readonly switchOffSound: Maybe<Pick<File, 'publicURL'>> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
