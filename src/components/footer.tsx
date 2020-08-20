@@ -25,6 +25,14 @@ const Footer = () => {
             >
                 github
         </a>
+        &bull;{' '}
+            <a
+                href="https://www.notion.so/preetjdp/Resume-914acc24c9de437991d3d43fbf289e41"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                resume
+        </a>
         </footer>
     );
 }
