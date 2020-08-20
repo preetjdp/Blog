@@ -28,16 +28,19 @@ export default {
         // },
       }
     },
-    `gatsby-plugin-typegen`,
-    // {
-    //   resolve: `gatsby-plugin-typegen`,
-    //   options: {
-    //     emitSchema: {
-    //       'src/__generated__/gatsby-schema.graphql': true,
-    //       'src/__generated__/gatsby-introspection.json': true,
-    //     },
-    //   },
-    // },
+    // `gatsby-plugin-typegen`,
+    {
+      resolve: `gatsby-plugin-typegen`,
+      options: {
+        // emitSchema: {
+        //   'src/__generated__/gatsby-schema.graphql': true,
+        //   'src/__generated__/gatsby-introspection.json': true,
+        // },
+        emitPluginDocuments: {
+          'src/__generated__/gatsby-plugin-documents.graphql': true,
+        },
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

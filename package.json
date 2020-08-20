@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "Preet Parekh",
   "dependencies": {
-    "@m5r/gatsby-transformer-blurhash": "github:m5r/gatsby-transformer-blurhash#93dfc5b",
+    "@m5r/gatsby-transformer-blurhash": "^1.0.1",
     "gatsby": "^2.24.47",
     "gatsby-image": "^2.4.16",
     "gatsby-plugin-manifest": "^2.4.23",
