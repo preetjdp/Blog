@@ -24,11 +24,18 @@ jobs:
       - name: Build Gatsby Website
         run: npm run build
       - name: Deploy to Netlify
-        uses: jsmrcaga/action-netlify-deploy@v1.1.0
-        with:
-          production-branch: master
-          publish-dir: "./public"
-          deploy-message: "Deploy from GitHub Actions"
+        uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --dir=public --prod
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+        # uses: jsmrcaga/action-netlify-deploy@v1.1.0
+        # with:
+        #   production-branch: master
+        #   publish-dir: "./public"
+        #   deploy-message: "Deploy from GitHub Actions"
+        # env:
+        #   NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+        #   NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
