@@ -1,4 +1,4 @@
-import { buildClientSchema, buildSchema } from "graphql"
+import { buildSchema } from "graphql"
 import fs from "fs"
 export default {
   siteMetadata: {
@@ -25,10 +25,6 @@ export default {
         createSchema: async () => {
           const sdl = fs.readFileSync(`${__dirname}/src/assets/schema.graphql`).toString()
           return buildSchema(sdl)
-          // const json = JSON.parse(
-          //   fs.readFileSync(`${__dirname}/src/assets/schema.introspection.json`).toString()
-          // )
-          // return buildClientSchema(json.data)
         },
       }
     },
