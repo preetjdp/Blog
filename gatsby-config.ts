@@ -1,4 +1,4 @@
-import { buildSchema } from "graphql"
+import { buildClientSchema, buildSchema } from "graphql"
 import fs from "fs"
 export default {
   siteMetadata: {
@@ -22,10 +22,14 @@ export default {
           Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
         },
         url: `https://api.github.com/graphql`,
-        // createSchema: async () => {
-        //   const sdl = fs.readFileSync(`${__dirname}/src/assets/github.schema.sdl`).toString()
-        //   return buildSchema(sdl)
-        // },
+        createSchema: async () => {
+          const sdl = fs.readFileSync(`${__dirname}/src/assets/schema.graphql`).toString()
+          return buildSchema(sdl)
+          // const json = JSON.parse(
+          //   fs.readFileSync(`${__dirname}/src/assets/schema.introspection.json`).toString()
+          // )
+          // return buildClientSchema(json.data)
+        },
       }
     },
     // `gatsby-plugin-typegen`,
