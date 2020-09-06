@@ -34,7 +34,7 @@ jobs:
         run: npm run build
       - name: Move Folder
         run: |
-          cp -RT /public /firebase
+          cp -RT ./public ./firebase/public
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
