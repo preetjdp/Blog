@@ -33,6 +33,14 @@ const Footer = () => {
             >
                 resume
         </a>
+        &bull;{' '}
+            <a
+                href="https://notion.preetjdp.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                notion
+        </a>
         </footer>
     );
 }
