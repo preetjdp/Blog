@@ -3,6 +3,9 @@ name: "Build"
 on:
   pull_request:
 
+env:
+  GITHUB_TOKEN: ${{ secrets.TOKEN }}
+
 jobs:
   setup-build-deploy:
     name: Setup Build and Deploy
