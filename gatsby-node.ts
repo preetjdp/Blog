@@ -11,6 +11,7 @@ import remarkParse from "remark-parse"
 import remark2rehype from "remark-rehype"
 import rehypeHtml from "rehype-stringify"
 import rehypePrism from "rehype-prism"
+import remarkPrism from "remark-prism"
 
 type resultReturnType = {
   github: any
@@ -101,12 +102,11 @@ export const createResolvers: GatsbyNode['createResolvers'] = async ({ createRes
         async resolve(source) {
           let markdown = source.body
           let processor = remark()
-            .use(remarkParse)
-            .use(remark2rehype)
-            .use(rehypePrism)
-            .use(rehypeHtml)
+            .use(remarkPrism, { showSpotlight: true, })
+            .use(remarkHtml)
 
           let processed = await processor.process(markdown)
+          console.log(processed.contents)
           return processed.contents
         },
       },
