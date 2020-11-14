@@ -41,7 +41,7 @@
     "remark-rehype": "^7.0.0",
     "remark-slug": "^6.0.0",
     "typeface-merriweather": "0.0.72",
-    "typeface-montserrat": "0.0.75",
+    "typeface-montserrat": "1.1.13",
     "typescript": "^3.9.7",
     "typography": "^0.16.19",
     "typography-theme-wordpress-2016": "^0.16.19",
