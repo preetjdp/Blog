@@ -23,7 +23,7 @@
     "gatsby-source-filesystem": "^2.3.24",
     "gatsby-source-graphql": "^2.7.1",
     "gatsby-transformer-remark": "^2.8.28",
-    "gatsby-transformer-sharp": "^2.5.13",
+    "gatsby-transformer-sharp": "^2.6.0",
     "graphql": "^14.6.0",
     "prismjs": "^1.21.0",
     "react": "^16.13.1",
