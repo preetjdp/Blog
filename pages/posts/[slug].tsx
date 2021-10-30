@@ -17,9 +17,9 @@ import { posts } from '../../posts.js';
 
 export default function Post({ post, tweets, pagination }) {
 	const router = useRouter();
-	const canonicalUrl = `https://aljoseph.co${router.asPath}`;
-	const GITHUB_USERNAME = 'condinoaljoseph';
-	const GITHUB_REPO = 'aljoseph.co';
+	const canonicalUrl = `https://preetjdp.dev${router.asPath}`;
+	const GITHUB_USERNAME = 'preetjdp';
+	const GITHUB_REPO = 'Blog';
 	const GITHUB_URL = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO}/edit/master/_posts/${post.frontMatter.slug}.mdx`;
 	const TWITTER_URL = `https://twitter.com/search?q=${encodeURIComponent(
 		canonicalUrl

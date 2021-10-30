@@ -27,7 +27,7 @@ export default function Home({ posts }) {
 					content="https://avatars.githubusercontent.com/u/41994701"
 				/>
 				<meta property="og:type" content="website" />
-				<meta property="og:site_name" content="Al Joseph Condino" />
+				<meta property="og:site_name" content="Preet Parekh | Blog" />
 				<meta
 					property="og:description"
 					content="Personal blog by Preet"
