@@ -12,7 +12,7 @@ import Tweet from '@/components/Tweet';
 import MDXComponents from '@/components/MDXComponents';
 
 import { getPostBySlug, getPagination } from '@/utils/api';
-import { getTweets } from '@/utils/twitter';
+// import { getTweets } from '@/utils/twitter';
 import { posts } from '../../posts.js';
 
 export default function Post({ post, tweets, pagination }) {
@@ -25,10 +25,10 @@ export default function Post({ post, tweets, pagination }) {
 		canonicalUrl
 	)}`;
 
-	const StaticTweet = ({ id }) => {
-		const tweet = tweets.find((tweet) => tweet.id === id);
-		return <Tweet {...tweet} />;
-	};
+	// const StaticTweet = ({ id }) => {
+	// 	const tweet = tweets.find((tweet) => tweet.id === id);
+	// 	return <Tweet {...tweet} />;
+	// };
 
 	return (
 		<>
@@ -62,7 +62,7 @@ export default function Post({ post, tweets, pagination }) {
 					<article className="prose prose-lg dark:prose-dark w-full">
 						<MDXRemote
 							{...post.mdxSource}
-							components={{ ...MDXComponents, StaticTweet }}
+							components={{ ...MDXComponents }}
 						/>
 					</article>
 					<footer className="mb-8 mt-6">
@@ -96,13 +96,13 @@ export default function Post({ post, tweets, pagination }) {
 
 export async function getStaticProps({ params }) {
 	const post = await getPostBySlug(params.slug);
-	const tweets = await getTweets(post.tweetIDs);
+	// const tweets = await getTweets(post.tweetIDs);
 	const { prevPage, nextPage } = getPagination(params.slug);
 
 	return {
 		props: {
 			post,
-			tweets,
+			// tweets,
 			pagination: {
 				prevPage,
 				nextPage
