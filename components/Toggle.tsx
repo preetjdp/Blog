@@ -1,198 +1,69 @@
-//@ts-nocheck
+import React from 'react';
+import { styled } from '@stitches/react';
+import { violet, mauve, blackA, whiteA, grayA, olive } from '@radix-ui/colors';
+import * as SwitchPrimitive from '@radix-ui/react-switch';
+import { useTheme } from 'next-themes';
 
-/*
- * Copyright (c) 2015 instructure-react
- * Forked from https://github.com/aaronshaf/react-toggle/
- * + applied https://github.com/aaronshaf/react-toggle/pull/90
- **/
+import { useSound } from "use-sound"
 
-import React, { PureComponent } from 'react';
-import styles from './toggle-styles.module.css';
 
-// Copyright 2015-present Drifty Co.
-// http://drifty.com/
-// from: https://github.com/driftyco/ionic/blob/master/src/util/dom.ts
-function pointerCoord(event) {
-	// get coordinates for either a mouse click
-	// or a touch depending on the given event
-	if (event) {
-		const changedTouches = event.changedTouches;
-		if (changedTouches && changedTouches.length > 0) {
-			const touch = changedTouches[0];
-			return { x: touch.clientX, y: touch.clientY };
-		}
-		const pageX = event.pageX;
-		if (pageX !== undefined) {
-			return { x: pageX, y: event.pageY };
-		}
-	}
-	return { x: 0, y: 0 };
-}
+const StyledSwitch = styled(SwitchPrimitive.Root, {
+  all: 'unset',
+  width: 42,
+  height: 25,
+  backgroundColor: "black",
+  borderRadius: '9999px',
+  position: 'relative',
+  boxShadow: `0 2px 10px ${blackA.blackA7}`,
+  WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+  '&:focus': { boxShadow: `0 0 0 2px ${olive.olive10}` },
+  '&[data-state="checked"]': { backgroundColor: 'black' },
+});
 
-export default class Toggle extends PureComponent {
-	constructor(props) {
-		super(props);
-		this.handleClick = this.handleClick.bind(this);
-		this.handleTouchStart = this.handleTouchStart.bind(this);
-		this.handleTouchMove = this.handleTouchMove.bind(this);
-		this.handleTouchEnd = this.handleTouchEnd.bind(this);
-		this.handleTouchCancel = this.handleTouchCancel.bind(this);
-		this.handleFocus = this.handleFocus.bind(this);
-		this.handleBlur = this.handleBlur.bind(this);
-		this.previouslyChecked = !!(props.checked || props.defaultChecked);
-		this.state = {
-			checked: !!(props.checked || props.defaultChecked),
-			hasFocus: false
-		};
-	}
+const StyledThumb = styled(SwitchPrimitive.Thumb, {
+  display: 'block',
+  width: 21,
+  height: 21,
+  backgroundColor: 'white',
+  borderRadius: '9999px',
+  boxShadow: `0 2px 2px ${blackA.blackA7}`,
+  transition: 'transform 100ms',
+  transform: 'translateX(2px)',
+  willChange: 'transform',
+  '&[data-state="checked"]': { transform: 'translateX(19px)' },
+});
 
-	componentWillReceiveProps(nextProps) {
-		if ('checked' in nextProps) {
-			this.setState({ checked: !!nextProps.checked });
-			this.previouslyChecked = !!nextProps.checked;
-		}
-	}
+// Exports
+const Switch = StyledSwitch;
+const SwitchThumb = StyledThumb;
 
-	handleClick(event) {
-		const checkbox = this.input;
-		this.previouslyChecked = checkbox.checked;
-		if (event.target !== checkbox && !this.moved) {
-			event.preventDefault();
-			checkbox.focus();
-			checkbox.click();
-			return;
-		}
+// Your app...
+const Flex = styled('div', { display: 'flex' });
 
-		this.setState({ checked: checkbox.checked });
-	}
+const Toggle = () => { 
+  const { setTheme, theme } = useTheme();
+  const [playSoundOn] = useSound('/assets/switch-on.mp3', {
+    volume: 0.5
+  });
+  const [playSoundOff] = useSound('/assets/switch-off.mp3', {
+    volume: 0.5
+  });
 
-	handleTouchStart(event) {
-		this.startX = pointerCoord(event).x;
-		this.touchStarted = true;
-		this.hadFocusAtTouchStart = this.state.hasFocus;
-		this.setState({ hasFocus: true });
-	}
+  const toggle = () => {
+    if(theme === 'dark') {
+      playSoundOn()
+    } else {
+      playSoundOff()
+    }
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
 
-	handleTouchMove(event) {
-		if (!this.touchStarted) return;
-		this.touchMoved = true;
+  return(
+    <Flex css={{ alignItems: 'center' }}>
+      <Switch onClick={() => toggle()} defaultChecked id="s1">
+        <SwitchThumb />
+      </Switch>
+    </Flex>
+)};
 
-		if (this.startX != null) {
-			let currentX = pointerCoord(event).x;
-			if (this.state.checked && currentX + 15 < this.startX) {
-				this.setState({ checked: false });
-				this.startX = currentX;
-			} else if (!this.state.checked && currentX - 15 > this.startX) {
-				this.setState({ checked: true });
-				this.startX = currentX;
-			}
-		}
-	}
-
-	handleTouchEnd(event) {
-		if (!this.touchMoved) return;
-		const checkbox = this.input;
-		event.preventDefault();
-
-		if (this.startX != null) {
-			if (this.previouslyChecked !== this.state.checked) {
-				checkbox.click();
-			}
-
-			this.touchStarted = false;
-			this.startX = null;
-			this.touchMoved = false;
-		}
-
-		if (!this.hadFocusAtTouchStart) {
-			this.setState({ hasFocus: false });
-		}
-	}
-
-	handleTouchCancel(event) {
-		if (this.startX != null) {
-			this.touchStarted = false;
-			this.startX = null;
-			this.touchMoved = false;
-		}
-
-		if (!this.hadFocusAtTouchStart) {
-			this.setState({ hasFocus: false });
-		}
-	}
-
-	handleFocus(event) {
-		const { onFocus } = this.props;
-
-		if (onFocus) {
-			onFocus(event);
-		}
-
-		this.hadFocusAtTouchStart = true;
-		this.setState({ hasFocus: true });
-	}
-
-	handleBlur(event) {
-		const { onBlur } = this.props;
-
-		if (onBlur) {
-			onBlur(event);
-		}
-
-		this.hadFocusAtTouchStart = false;
-		this.setState({ hasFocus: false });
-	}
-
-	getIcon(type) {
-		const { icons } = this.props;
-		if (!icons) {
-			return null;
-		}
-		return icons[type] === undefined
-			? Toggle.defaultProps.icons[type]
-			: icons[type];
-	}
-
-	render() {
-		const { className, icons: _icons, ...inputProps } = this.props;
-
-		const classes = `${styles['react-toggle']} ${
-			this.state.checked ? styles['react-toggle--checked'] : ''
-		} ${this.state.hasFocus ? styles['react-toggle--focus'] : ''} ${
-			this.state.disabled ? styles['react-toggle--disabled'] : ''
-		} ${className ? className : ''}`;
-
-		return (
-			<div
-				className={classes}
-				onClick={this.handleClick}
-				onTouchStart={this.handleTouchStart}
-				onTouchMove={this.handleTouchMove}
-				onTouchEnd={this.handleTouchEnd}
-				onTouchCancel={this.handleTouchCancel}
-			>
-				<div className={styles['react-toggle-track']}>
-					<div className={styles['react-toggle-track-check']}>
-						{this.getIcon('checked')}
-					</div>
-					<div className={styles['react-toggle-track-x']}>
-						{this.getIcon('unchecked')}
-					</div>
-				</div>
-				<div className={styles['react-toggle-thumb']} />
-
-				<input
-					{...inputProps}
-					ref={(ref) => {
-						this.input = ref;
-					}}
-					onFocus={this.handleFocus}
-					onBlur={this.handleBlur}
-					className={styles['react-toggle-screenreader-only']}
-					type="checkbox"
-					aria-label="Switch between Dark and Light mode"
-				/>
-			</div>
-		);
-	}
-}
+export default Toggle;
