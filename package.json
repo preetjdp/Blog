@@ -38,6 +38,7 @@
 	"devDependencies": {
 		"@types/react": "17.0.33",
 		"@types/rss": "0.0.29",
+		"@types/tailwindcss": "2.2.2",
 		"eslint": "7.32.0",
 		"eslint-config-next": "^12.0.1",
 		"typescript": "4.4.4"

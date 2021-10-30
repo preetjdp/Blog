@@ -1,10 +1,16 @@
 const { fontFamily, boxShadow, fontSize } = require('tailwindcss/defaultTheme');
 
+/** @type {import('tailwindcss/tailwind-config').TailwindConfig} */
 module.exports = {
 	purge: ['./pages/**/*.js', './components/**/*.js'],
 	darkMode: 'class',
 	theme: {
 		extend: {
+			colors: { 
+				gray: {
+					"custom-1": "#282c35"
+				}
+			},
 			typography: (theme) => ({
 				DEFAULT: {
 					css: {
