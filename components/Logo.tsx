@@ -8,14 +8,14 @@ const Logo = () => {
 	return isIndex ? (
 		<h1 className="font-sans font-black">
 			<Link href="/">
-				<a className="text-xxl text-gray-900 dark:text-gray-200">aljoseph.co</a>
+				<a className="text-xxl text-gray-900 dark:text-gray-200">Blog</a>
 			</Link>
 		</h1>
 	) : (
 		<h4 className="font-sans font-black">
 			<Link href="/">
 				<a className="text-xxl text-pink-600 dark:text-pink-300 leading-9">
-					aljoseph.co
+					Blog
 				</a>
 			</Link>
 		</h4>

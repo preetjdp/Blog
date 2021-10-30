@@ -13,14 +13,15 @@ export default function Home({ posts }) {
 	return (
 		<>
 			<Head>
-				<title>Al Joseph Condino - Developer and Writer</title>
+				<title>Blog</title>
+				<link rel="icon" href="/favicon.png" type="image/png"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<meta charSet="utf-8" />
 				<meta
 					name="description"
-					content="Personal blog by Al Joseph Condino."
+					content="Personal blog by Preet"
 				/>
-				<meta property="og:title" content="aljoseph.co" />
+				<meta property="og:title" content="preetjdp.dev" />
 				<meta
 					property="og:image"
 					content="https://avatars.githubusercontent.com/u/41994701"
@@ -29,14 +30,14 @@ export default function Home({ posts }) {
 				<meta property="og:site_name" content="Al Joseph Condino" />
 				<meta
 					property="og:description"
-					content="Personal blog by Al Joseph Condino."
+					content="Personal blog by Preet"
 				/>
 				<meta name="twitter:card" content="summary_large_image" />
-				<meta name="twitter:site" content="@condino_aj" />
-				<meta name="twitter:title" content="aljoseph.co" />
+				<meta name="twitter:site" content="@TmPreet" />
+				<meta name="twitter:title" content="preetjdp.dev" />
 				<meta
 					name="twitter:description"
-					content="Personal blog by Al Joseph Condino."
+					content="Personal blog by Preet Parekh"
 				/>
 				<meta
 					name="twitter:image"

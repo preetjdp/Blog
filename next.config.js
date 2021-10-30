@@ -7,7 +7,8 @@ module.exports = withMDX({
 	swcMinify: true,
 	// pageExtensions: ['js', 'jsx', 'md', 'mdx'],
 	images: {
-		domains: ['pbs.twimg.com', 'images.unsplash.com']
+		domains: ['pbs.twimg.com', 'images.unsplash.com'],
+		formats: ['image/avif', 'image/webp'],
 	},
 	webpack: (config, { isServer }) => {
 		// if (isServer) {

@@ -34,7 +34,7 @@ const Footer = () => {
 			<div>
 				<a
 					className="text-pink-700 dark:text-pink-300 shadow-link hover:shadow-none justify-self-end"
-					href="https://aljoseph.co/feed.xml"
+					href="https://preetjdp.dev/feed.xml"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
