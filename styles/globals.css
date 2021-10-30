@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-display: optional;
+		font-family: 'charter';
+		src: local('charter'),
+			url(/fonts/charter/charter_regular-webfont.woff2) format('woff2');
+		font-weight: 400;
+		font-style: normal;
+		unicode-range: U+000-5FF; /* Latin glyphs */
+	}
+
+	@font-face {
+		font-display: optional;
+		font-family: 'charter';
+		src: local('charter'),
+			url(/fonts/charter/charter_italic-webfont.woff2) format('woff2');
+		font-weight: 400;
+		font-style: italic;
+		unicode-range: U+000-5FF; /* Latin glyphs */
+	}
+
+	@font-face {
+		font-display: optional;
+		font-family: 'charter';
+		src: local('charter'),
+			url(/fonts/charter/charter_bold-webfont.woff2) format('woff2');
+		font-weight: 600;
+		font-style: normal;
+		unicode-range: U+000-5FF; /* Latin glyphs */
+	}
+
+	@font-face {
+		font-display: optional;
+		font-family: 'charter';
+		src: local('charter'),
+			url(/fonts/charter/charter_bold_italic-webfont.woff2) format('woff2');
+		font-weight: 600;
+		font-style: italic;
+		unicode-range: U+000-5FF; /* Latin glyphs */
+	}
+
+	/* montserrat */
+
+	@font-face {
+		font-display: optional;
+		font-family: 'montserrat';
+		src: local('montserrat'),
+			url(/fonts/montserrat/montserrat-900-l.woff2) format('woff2');
+		font-weight: 900;
+		font-style: normal;
+		unicode-range: U+000-5FF; /* Latin glyphs */
+	}
+}
+
+.prose .anchor {
+	@apply absolute invisible;
+
+	margin-left: -1em;
+	padding-right: 0.5em;
+	width: 80%;
+	max-width: 700px;
+	cursor: pointer;
+}
+
+.anchor:hover {
+	@apply visible no-underline;
+}
+
+.prose .anchor:after {
+	@apply text-gray-300 dark:text-gray-700;
+	content: '#';
+}
+
+.prose *:hover > .anchor {
+	@apply visible no-underline;
+}
+
+/* Code syntax highlighting */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	@apply text-gray-700 dark:text-gray-300;
+}
+
+.token.punctuation {
+	@apply text-gray-700 dark:text-gray-300;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	@apply text-green-700 dark:text-green-300;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	@apply text-purple-700 dark:text-purple-300;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	@apply text-yellow-700 dark:text-yellow-300;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	@apply text-blue-700 dark:text-blue-300;
+}
+
+.token.function,
+.token.class-name {
+	@apply text-pink-700 dark:text-pink-300;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	@apply text-yellow-300;
+}
+
+:not(pre[class*='language-']) > code {
+	@apply prose bg-yellow-100 dark:bg-gray-700 text-gray-900 dark:text-gray-200;
+}
+
+pre[class*='language-'] {
+	@apply mb-6 p-4 bg-gray-100 dark:bg-gray-900 rounded-md overflow-x-auto border border-gray-200 dark:border-gray-900;
+}
+
+code[class*='language-'],
+pre[class*='language-'] {
+	@apply text-gray-800 dark:text-gray-50 text-sm;
+}
+
+pre::-webkit-scrollbar {
+	display: none;
+}
+
+pre {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+.remark-code-title {
+	@apply text-gray-800 dark:text-gray-200 px-5 py-3 border border-b-0 border-gray-200 dark:border-gray-700 rounded-t bg-gray-200 dark:bg-gray-800 text-sm font-bold;
+}
+
+.remark-code-title + pre {
+	@apply mt-0 rounded-t-none;
+}
+
+.mdx-marker {
+	@apply block -mx-4 px-3 bg-gray-100 bg-blue-100 dark:bg-blue-900 border-l-4 border-pink-700 dark:border-pink-300;
+}
