@@ -11,6 +11,7 @@ const Header = () => {
 			<Logo />
 			{theme === undefined ? null : (
 				<Toggle
+				//@ts-expect-error IG
 					icons={{
 						checked: (
 							<Image

@@ -1,4 +1,4 @@
-//@ts-ignore
+//@ts-nocheck
 
 /*
  * Copyright (c) 2015 instructure-react

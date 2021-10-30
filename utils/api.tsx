@@ -3,6 +3,9 @@ import { join } from 'path';
 import { serialize } from 'next-mdx-remote/serialize';
 import matter from 'gray-matter';
 import mdxPrism from 'mdx-prism';
+import remarkSlug from "remark-slug"
+import remarkAutolinkHeadings from "remark-autolink-headings"
+import remarkCodeTitles from "remark-code-titles"
 
 import MDXComponents from '@/components/MDXComponents';
 import { posts } from '../posts.js';
@@ -25,16 +28,16 @@ export async function getPostBySlug(slug) {
 		scope: data,
 		mdxOptions: {
 			remarkPlugins: [
-				require('remark-slug'),
+				remarkSlug,
 				[
-					require('remark-autolink-headings'),
+					remarkAutolinkHeadings,
 					{
 						linkProperties: {
 							className: ['anchor', 'shadow-none']
 						}
 					}
 				],
-				require('remark-code-titles')
+				remarkCodeTitles
 			],
 			rehypePlugins: [mdxPrism]
 		}
