@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { getAllPosts } from "@/utils/api";
 import { InternalPost } from "@/utils/types";
+import { generateRSS } from "@/utils/rss";
 
 export default function Home(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -64,6 +65,8 @@ interface Props {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
+  await generateRSS();
+
   const posts = await getAllPosts();
   return {
     props: { posts },

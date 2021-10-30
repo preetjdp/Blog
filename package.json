@@ -7,7 +7,8 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"lint:fix": "next lint --fix"
+		"lint:fix": "next lint --fix",
+		"github:types": "graphql-codegen --require dotenv/config"
 	},
 	"dependencies": {
 		"@mailchimp/mailchimp_marketing": "^3.0.71",
@@ -42,6 +43,9 @@
 		"use-sound": "4.0.1"
 	},
 	"devDependencies": {
+		"@graphql-codegen/cli": "2.2.2",
+		"@graphql-codegen/typescript": "2.3.0",
+		"@graphql-codegen/typescript-operations": "2.2.0",
 		"@types/react": "17.0.33",
 		"@types/rss": "0.0.29",
 		"@types/tailwindcss": "2.2.2",

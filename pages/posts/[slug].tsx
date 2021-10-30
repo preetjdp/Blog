@@ -95,7 +95,6 @@ export default function Post({ post, tweets, pagination }) {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const params = context.params as Record<string, string>;
-  console.log(params.slug);
   const post = await getPostBySlug(params.slug);
 
   if (!post) {
@@ -104,8 +103,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   // const tweets = await getTweets(post.tweetIDs);
   const { prevPage, nextPage } = await getPagination(params.slug);
-
-  console.log(post);
 
   return {
     props: {

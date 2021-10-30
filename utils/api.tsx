@@ -10,6 +10,12 @@ import remarkCodeTitles from "remark-code-titles";
 import MDXComponents from "@/components/MDXComponents";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { InternalPost, InternalPostMeta } from "./types.js";
+import { githubClient } from "./graphql";
+import { gql } from "graphql-request";
+import {
+  GetGithubIssuesQuery,
+  GetGithubIssuesQueryVariables,
+} from "./github-generated-types.js";
 
 const postDirectory = join(process.cwd(), "_posts");
 
@@ -63,7 +69,65 @@ const getLocalMDXPosts = async (): Promise<Array<InternalPost>> => {
     });
   }
 
-  // console.log(result);
+  return result;
+};
+
+const getGithubMDXPosts = async (): Promise<Array<InternalPost>> => {
+  const QUERY = gql`
+    query getGithubIssues {
+      viewer {
+        repository(name: "Blog") {
+          issues(first: 20, labels: ["Blog"]) {
+            nodes {
+              body
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const result: Array<InternalPost> = [];
+
+  const data = await githubClient.request<
+    GetGithubIssuesQuery,
+    GetGithubIssuesQueryVariables
+  >(QUERY);
+
+  for await (const node of data.viewer.repository.issues.nodes) {
+    const fileContents = node.body;
+    const { data, content } = matter(fileContents);
+    const mdxSource = (await serialize(content, {
+      //@ts-expect-error Ignore
+      components: MDXComponents,
+      scope: data,
+      mdxOptions: {
+        remarkPlugins: [
+          remarkSlug,
+          [
+            remarkAutolinkHeadings,
+            {
+              linkProperties: {
+                className: ["anchor", "shadow-none"],
+              },
+            },
+          ],
+          remarkCodeTitles,
+        ],
+        rehypePlugins: [mdxPrism],
+      },
+    })) as unknown as MDXRemoteSerializeResult<InternalPostMeta>;
+
+    const tweetMatches = content.match(/<StaticTweet\sid="[0-9]+"\s\/>/g);
+    const tweetIDs = tweetMatches?.map((tweet) => tweet.match(/[0-9]+/g)[0]);
+
+    result.push({
+      slug: data.slug,
+      mdxSource,
+      tweetIDs: tweetIDs || [],
+      frontMatter: data as InternalPostMeta,
+    });
+  }
 
   return result;
 };
@@ -75,8 +139,12 @@ const getLocalMDXPosts = async (): Promise<Array<InternalPost>> => {
  */
 const getAllPosts = async (): Promise<Array<InternalPost>> => {
   const localPosts = await getLocalMDXPosts();
+  const githubPosts = await getGithubMDXPosts();
 
-  return [...localPosts];
+  return [
+    // ...localPosts,
+    ...githubPosts,
+  ];
 };
 
 /**
@@ -87,8 +155,6 @@ const getAllPosts = async (): Promise<Array<InternalPost>> => {
  */
 export const getPostBySlug = async (slug: string) => {
   const posts = await getAllPosts();
-
-  console.log(posts.map((e) => e.slug));
 
   const post = posts.find((e) => e.slug === slug);
 
