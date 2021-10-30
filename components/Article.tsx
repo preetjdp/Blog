@@ -3,7 +3,11 @@ import React from "react";
 import Link from "next/link";
 import BlogDate from "./BlogDate";
 
-const Article = ({ title, date, excerpt, slug, readingTime }) => {
+/**
+ *
+ * @todo Fix readingTime
+ */
+const Article = ({ title, date, excerpt, slug, readingTime = 2 }) => {
   return (
     <article>
       <header>

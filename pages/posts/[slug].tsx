@@ -13,9 +13,9 @@ import Pagination from "@/components/Pagination";
 import Tweet from "@/components/Tweet";
 import MDXComponents from "@/components/MDXComponents";
 
-import { getPostBySlug, getPagination } from "@/utils/api";
+import { getPostBySlug, getPagination, getAllPosts } from "@/utils/api";
 // import { getTweets } from '@/utils/twitter';
-import { posts } from "../../posts.js";
+import { GetStaticPaths, GetStaticProps } from "next";
 
 export default function Post({ post, tweets, pagination }) {
   const router = useRouter();
@@ -93,10 +93,19 @@ export default function Post({ post, tweets, pagination }) {
   );
 }
 
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps = async (context) => {
+  const params = context.params as Record<string, string>;
+  console.log(params.slug);
   const post = await getPostBySlug(params.slug);
+
+  if (!post) {
+    return { notFound: true };
+  }
+
   // const tweets = await getTweets(post.tweetIDs);
-  const { prevPage, nextPage } = getPagination(params.slug);
+  const { prevPage, nextPage } = await getPagination(params.slug);
+
+  console.log(post);
 
   return {
     props: {
@@ -108,17 +117,19 @@ export async function getStaticProps({ params }) {
       },
     },
   };
-}
+};
 
-export function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getAllPosts();
+
   return {
     paths: posts.map((post) => {
       return {
         params: {
-          slug: post.slug,
+          slug: post.mdxSource.scope.slug,
         },
       };
     }),
     fallback: false,
   };
-}
+};

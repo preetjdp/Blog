@@ -8,10 +8,13 @@ import Aside from "@/components/Aside";
 import Main from "@/components/Main";
 import Article from "@/components/Article";
 import Footer from "@/components/Footer";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { getAllPosts } from "@/utils/api";
+import { InternalPost } from "@/utils/types";
 
-import { posts } from "../posts.js";
-
-export default function Home({ posts }) {
+export default function Home(
+  props: InferGetStaticPropsType<typeof getStaticProps>
+) {
   return (
     <>
       <Head>
@@ -44,8 +47,10 @@ export default function Home({ posts }) {
         <Header />
         <Aside />
         <Main>
-          {posts && posts.length > 0
-            ? posts.map((post) => <Article key={post.slug} {...post} />)
+          {props.posts && props.posts.length > 0
+            ? props.posts.map((post) => (
+                <Article key={post.slug} {...post.frontMatter} />
+              ))
             : null}
         </Main>
         <Footer />
@@ -54,8 +59,13 @@ export default function Home({ posts }) {
   );
 }
 
-export async function getStaticProps() {
+interface Props {
+  posts: Array<InternalPost>;
+}
+
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
+  const posts = await getAllPosts();
   return {
     props: { posts },
   };
-}
+};
