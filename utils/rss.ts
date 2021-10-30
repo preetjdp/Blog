@@ -1,7 +1,7 @@
-const { promises: fs } = require('fs');
-const { join } = require('path');
-const RSS = require('rss');
-const matter = require('gray-matter');
+import fs from "fs/promises"
+import {join} from "path"
+import RSS from "rss"
+import matter from "gray-matter"
 
 const postDirectory = join(process.cwd(), '_posts');
 

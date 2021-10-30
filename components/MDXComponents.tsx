@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Figure, { Figcaption } from './Figure.js';
+import Figure, { Figcaption } from './Figure';
 import CustomLink from './CustomLink';
 
 const MDXComponents = {

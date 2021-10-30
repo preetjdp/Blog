@@ -20,6 +20,7 @@ export async function getPostBySlug(slug) {
 
 	const { data, content } = matter(fileContents);
 	const mdxSource = await serialize(content, {
+		//@ts-expect-error Ignore
 		components: MDXComponents,
 		scope: data,
 		mdxOptions: {

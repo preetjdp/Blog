@@ -18,7 +18,7 @@ const Header = () => {
 								width={16}
 								height={16}
 								alt="moon"
-								style={{ pointerEvents: 'none' }}
+								// style={{ pointerEvents: 'none' }}
 							/>
 						),
 						unchecked: (
@@ -27,7 +27,7 @@ const Header = () => {
 								width={16}
 								height={16}
 								alt="sun"
-								style={{ pointerEvents: 'none' }}
+								// style={{ pointerEvents: 'none' }}
 							/>
 						)
 					}}

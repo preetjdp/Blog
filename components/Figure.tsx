@@ -1,9 +1,8 @@
 import React from 'react';
 
-export const Figcaption = ({ children }) => {
+export const Figcaption = ()  => {
 	return (
 		<figcaption className="text-gray-600 dark:text-gray-300 font-default text-sm mt-3">
-			{children}
 		</figcaption>
 	);
 };
