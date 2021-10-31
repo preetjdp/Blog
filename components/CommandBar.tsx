@@ -25,7 +25,7 @@ const actions = [
     shortcut: ["h"],
     keywords: "back",
     section: "Navigation",
-    perform: () => history.push("/"),
+    // perform: () => history.push("/"),
     // icon: <HomeIcon />,
     subtitle: "Subtitles can help add more context.",
   },
@@ -35,7 +35,7 @@ const actions = [
     shortcut: ["g", "d"],
     keywords: "help",
     section: "Navigation",
-    perform: () => history.push("/docs"),
+    // perform: () => history.push("/docs"),
   },
   {
     id: "contactAction",
