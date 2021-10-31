@@ -66,6 +66,7 @@ module.exports = {
         serif: ["charter"],
         default: ["system-ui"],
         mono: ["monospace"],
+        system: ["system-ui"],
       },
       boxShadow: {
         "3xl": "0 0px 60px -15px rgba(0, 0, 0, 0.3)",

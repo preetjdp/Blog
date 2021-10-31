@@ -56,3 +56,32 @@ export const Tooltip = TooltipPrimitive.Root;
 export const TooltipTrigger = TooltipPrimitive.Trigger;
 export const TooltipContent = StyledContent;
 export const TooltipArrow = StyledArrow;
+
+interface TextTooltipProps {
+  tooltip: React.ReactNode | string;
+  children: React.ReactNode;
+
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  asChild?: boolean;
+}
+
+export const SimpleTooltip = (props: TextTooltipProps) => {
+  return (
+    <Tooltip delayDuration={0}>
+      <TooltipTrigger
+        className="appearance-none"
+        asChild={props.asChild}
+        onClick={props.onClick}
+      >
+        <div className="">{props.children}</div>
+      </TooltipTrigger>
+      <TooltipContent
+        className="bg-gray-100 dark:bg-gray-custom-1 border-1 border-solid border-black dark:border-white"
+        sideOffset={0}
+      >
+        {/* {typeof props.tooltip === "string" ? props.tooltip : props.tooltip} */}
+        {props.tooltip}
+      </TooltipContent>
+    </Tooltip>
+  );
+};
