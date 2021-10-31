@@ -45,7 +45,7 @@ const actions = (
       section: "Navigation",
       perform: () => router.push("/"),
       icon: <HomeIcon />,
-      subtitle: "Subtitles can help add more context.",
+      // subtitle: "Subtitles can help add more context.",
     },
     {
       id: "backAction",
@@ -133,7 +133,7 @@ const RenderResults = () => {
     <KBarResults
       items={flattened.filter((i) => i !== "none")}
       onRender={({ item, active }) => (
-        <div className="px-2">
+        <div className="px-4">
           {typeof item === "string" ? (
             <div className="py-4 text-xs uppercase opacity-50 font-mono">
               {item}
@@ -203,8 +203,8 @@ const CommandBar = (props: CommandBarProps) => {
         <KBarPositioner>
           <KBarAnimator className="max-w-xl w-full bg-gray-50 rounded-lg shadow-3xl overflow-hidden dark:bg-gray-custom-1">
             <KBarSearch
-              placeholder="Search Blog ..."
-              className="px-3 py-4 text-xl w-full box-border outline-none border-none bg-gray-50 font-mono dark:bg-gray-custom-1"
+              placeholder="Search the Blog ..."
+              className="px-4 py-4 text-xl w-full box-border outline-none border-none bg-gray-50 font-mono dark:bg-gray-custom-1"
             />
             <div className="pb-2">
               <RenderResults />
