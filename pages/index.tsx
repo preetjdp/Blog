@@ -27,7 +27,7 @@ export default function Home(
         <meta property="og:title" content="preetjdp.dev" />
         <meta
           property="og:image"
-          content="https://avatars.githubusercontent.com/u/41994701"
+          content="https://github.com/preetjdp/Blog/blob/b8b1afda6a86a90e60a6b4f31289872eb9e435a8/public/assets/og_image.png?raw=true"
         />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Preet Parekh | Blog" />
