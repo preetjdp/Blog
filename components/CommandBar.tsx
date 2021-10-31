@@ -9,95 +9,94 @@ import {
   KBarResults,
   useMatches,
   Action,
+  useKBar,
+  createAction,
 } from "kbar";
-import { styled } from "@stitches/react";
-import { whiteA, gray } from "@radix-ui/colors";
-import { mauve } from "@radix-ui/colors";
+import { classNames } from "@/utils/helpers";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
+
+import { Command } from "react-feather";
+
+import {
+  TwitterLogoIcon,
+  HomeIcon,
+  GitHubLogoIcon,
+  CrumpledPaperIcon,
+  LightningBoltIcon,
+} from "@radix-ui/react-icons";
+import { useTheme } from "next-themes";
 
 interface CommandBarProps {
   children: React.ReactNode;
 }
 
-const actions = [
-  {
-    id: "homeAction",
-    name: "Home",
-    shortcut: ["h"],
-    keywords: "back",
-    section: "Navigation",
-    // perform: () => history.push("/"),
-    // icon: <HomeIcon />,
-    subtitle: "Subtitles can help add more context.",
-  },
-  {
-    id: "docsAction",
-    name: "Docs",
-    shortcut: ["g", "d"],
-    keywords: "help",
-    section: "Navigation",
-    // perform: () => history.push("/docs"),
-  },
-  {
-    id: "contactAction",
-    name: "Contact",
-    shortcut: ["c"],
-    keywords: "email hello",
-    section: "Navigation",
-    perform: () => window.open("mailto:timchang@hey.com", "_blank"),
-  },
-  {
-    id: "twitterAction",
-    name: "Twitter",
-    shortcut: ["t"],
-    keywords: "social contact dm",
-    section: "Navigation",
-    perform: () => window.open("https://twitter.com/timcchang", "_blank"),
-  },
-  //   createAction({
-  //     name: "Github",
-  //     shortcut: ["g", "h"],
-  //     keywords: "sourcecode",
-  //     section: "Navigation",
-  //     perform: () => window.open("https://github.com/timc1/kbar", "_blank"),
-  //   }),
-  {
-    id: "theme",
-    name: "Change theme…",
-    shortcut: [],
-    keywords: "interface color dark light",
-    section: "Preferences",
-    children: ["darkTheme", "lightTheme"],
-  },
-  {
-    id: "darkTheme",
-    name: "Dark",
-    shortcut: [],
-    keywords: "dark",
-    section: "",
-    perform: () => document.documentElement.setAttribute("data-theme-dark", ""),
-    parent: "theme",
-  },
-  {
-    id: "lightTheme",
-    name: "Light",
-    shortcut: [],
-    keywords: "light",
-    section: "",
-    perform: () => document.documentElement.removeAttribute("data-theme-dark"),
-    parent: "theme",
-  },
-];
-
-// const searchStyle = {
-//   padding: "12px 16px",
-//   fontSize: "16px",
-//   width: "100%",
-//   boxSizing: "border-box" as React.CSSProperties["boxSizing"],
-//   outline: "none",
-//   border: "none",
-//   background: "var(--background)",
-//   color: "var(--foreground)",
-// };
+const actions = (toggleTheme): Action[] => {
+  return [
+    {
+      id: "homeAction",
+      name: "Home",
+      shortcut: ["h"],
+      keywords: "back",
+      section: "Navigation",
+      // perform: () => history.push("/"),
+      icon: <HomeIcon />,
+      subtitle: "Subtitles can help add more context.",
+    },
+    {
+      id: "contactAction",
+      name: "Contact",
+      shortcut: ["c"],
+      keywords: "email hello",
+      section: "Navigation",
+      icon: <CrumpledPaperIcon />,
+      perform: () => window.open("mailto:hello@preetjdp.dev", "_blank"),
+    },
+    {
+      id: "twitterAction",
+      name: "Twitter",
+      shortcut: ["t"],
+      keywords: "social contact dm",
+      section: "Social",
+      icon: <TwitterLogoIcon />,
+      perform: () => window.open("https://twitter.com/TmPreet", "_blank"),
+    },
+    createAction({
+      name: "Github",
+      shortcut: ["g", "h"],
+      keywords: "sourcecode",
+      section: "Social",
+      icon: <GitHubLogoIcon />,
+      perform: () => window.open("https://github.com/preetjdp", "_blank"),
+    }),
+    {
+      id: "theme",
+      name: "Change Theme",
+      shortcut: [],
+      keywords: "interface color dark light",
+      section: "Preferences",
+      icon: <LightningBoltIcon />,
+      children: ["darkTheme", "lightTheme"],
+    },
+    {
+      id: "darkTheme",
+      name: "Dark",
+      shortcut: [],
+      keywords: "dark",
+      section: "",
+      perform: () => toggleTheme("dark"),
+      parent: "theme",
+    },
+    {
+      id: "lightTheme",
+      name: "Light",
+      shortcut: [],
+      keywords: "light",
+      section: "",
+      perform: () => toggleTheme("light"),
+      parent: "theme",
+    },
+  ];
+};
 
 /**
  * Returns the results for the Command Bar
@@ -119,47 +118,20 @@ const RenderResults = () => {
   return (
     <KBarResults
       items={flattened.filter((i) => i !== "none")}
-      onRender={({ item, active }) =>
-        typeof item === "string" ? (
-          <GroupNameDiv>{item}</GroupNameDiv>
-        ) : (
-          <ResultItem action={item} active={active} />
-        )
-      }
+      onRender={({ item, active }) => (
+        <div className="px-2">
+          {typeof item === "string" ? (
+            <div className="py-4 text-xs uppercase opacity-50 font-mono">
+              {item}
+            </div>
+          ) : (
+            <ResultItem action={item} active={active} />
+          )}
+        </div>
+      )}
     />
   );
 };
-
-const GroupNameDiv = styled("div", {
-  padding: "8px 16px",
-  fontSize: "10px",
-  textTransform: "uppercase" as const,
-  opacity: 0.5,
-  background: gray.gray2,
-  color: "Black",
-  fontFamily: "monospace",
-});
-
-const ResultItemWrapper = styled("div", {
-  padding: "12px 16px",
-  // background: active ? "var(--a1)" : "var(--background)",
-  background: gray.gray10,
-  borderLeft: `2px solid transparent`,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  cursor: "pointer",
-  fontFamily: "monospace",
-  color: gray.gray9,
-  variants: {
-    active: {
-      true: {
-        background: gray.gray4,
-        borderLeft: `2px solid ${mauve.mauve1}`,
-      },
-    },
-  },
-});
 
 // eslint-disable-next-line react/display-name
 const ResultItem = React.forwardRef(
@@ -174,74 +146,79 @@ const ResultItem = React.forwardRef(
     ref: React.Ref<HTMLDivElement>
   ) => {
     return (
-      <ResultItemWrapper ref={ref} active>
-        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+      <div
+        ref={ref}
+        className={classNames(
+          "px-3 py-4 flex align-middle justify-between cursor-pointer font-mono text-gray-700 opacity-80 rounded-md transition-colors duration-75  dark:text-white",
+          active ? "bg-gray-200 dark:bg-gray-600" : "dark:bg-gray-custom-1"
+        )}
+      >
+        <div className="flex gap-2 items-center">
           {action.icon && action.icon}
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div className="flex flex-col ml-2">
             <span className="font-semibold text-lg">{action.name}</span>
             {action.subtitle && (
-              <span style={{ fontSize: 12 }}>{action.subtitle}</span>
+              <span className="text-xs">{action.subtitle}</span>
             )}
           </div>
         </div>
         {action.shortcut?.length ? (
-          <div style={{ display: "grid", gridAutoFlow: "column", gap: "4px" }}>
+          <div className="grid grid-flow-col gap-4 items-center">
             {action.shortcut.map((sc) => (
               <kbd
                 key={sc}
-                style={{
-                  padding: "4px 6px",
-                  background: "rgba(0 0 0 / .1)",
-                  borderRadius: "4px",
-                }}
+                className="flex items-center justify-center p-2 bg-gray-300 rounded-sm font-bold text-xs min-h-3 min-w-3 dark:bg-gray-500"
               >
                 {sc}
               </kbd>
             ))}
           </div>
         ) : null}
-      </ResultItemWrapper>
+      </div>
     );
   }
 );
 
-const Animator = styled(KBarAnimator, {
-  maxWidth: "600px",
-  width: "100%",
-  background: gray.gray2,
-  borderRadius: "8px",
-  overflow: "hidden",
-  // boxShadow: whiteA.whiteA12,
-  boxShadow: "0 16px 70px rgb(0 0 0 / 20%)",
-});
-
-const SearchBar = styled(KBarSearch, {
-  padding: "12px 16px",
-  fontSize: "16px",
-  width: "100%",
-  boxSizing: "border-box" as React.CSSProperties["boxSizing"],
-  outline: "none",
-  border: "none",
-  background: whiteA.whiteA1,
-  color: "Black",
-  fontFamily: "monospace",
-});
-
 const CommandBar = (props: CommandBarProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  (() => {})();
+  const { setTheme } = useTheme();
+
   return (
-    <KBarProvider actions={actions}>
+    <KBarProvider actions={actions(setTheme)}>
       <KBarPortal>
         <KBarPositioner>
-          <Animator>
-            <SearchBar placeholder="Search Blog ..." />
-            <RenderResults />
-          </Animator>
+          <KBarAnimator className="max-w-xl w-full bg-gray-50 rounded-lg shadow-3xl overflow-hidden dark:bg-gray-custom-1">
+            <KBarSearch
+              placeholder="Search Blog ..."
+              className="px-3 py-4 text-xl w-full box-border outline-none border-none bg-gray-50 font-mono dark:bg-gray-custom-1"
+            />
+            <div className="pb-2">
+              <RenderResults />
+            </div>
+          </KBarAnimator>
         </KBarPositioner>
       </KBarPortal>
       {props.children}
     </KBarProvider>
+  );
+};
+
+/**
+ * The command bar toggle
+ */
+export const CommandBarToggle = () => {
+  const { query } = useKBar();
+
+  return (
+    <Tooltip delayDuration={0}>
+      <TooltipTrigger asChild onClick={() => query.toggle()}>
+        <div className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700">
+          <Command className="text-gray-custom-1 dark:text-white" />
+        </div>
+      </TooltipTrigger>
+      <TooltipContent className="bg-gray-300 dark:bg-gray-500" sideOffset={10}>
+        ⌘K
+      </TooltipContent>
+    </Tooltip>
   );
 };
 

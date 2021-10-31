@@ -1,12 +1,8 @@
 import fs from "fs/promises";
-import { join } from "path";
 import RSS from "rss";
 import { getAllPosts } from "./api";
 
-const postDirectory = join(process.cwd(), "_posts");
-
 export async function generateRSS() {
-  console.log("heere");
   const feed = new RSS({
     title: "Preet Parekh ",
     site_url: "https://preetjdp.dev",
