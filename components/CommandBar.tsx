@@ -23,14 +23,19 @@ import {
   GitHubLogoIcon,
   CrumpledPaperIcon,
   LightningBoltIcon,
+  ArrowLeftIcon,
 } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
+import { NextRouter, useRouter } from "next/router";
 
 interface CommandBarProps {
   children: React.ReactNode;
 }
 
-const actions = (toggleTheme): Action[] => {
+const actions = (
+  toggleTheme: (theme: string) => void,
+  router: NextRouter
+): Action[] => {
   return [
     {
       id: "homeAction",
@@ -38,16 +43,25 @@ const actions = (toggleTheme): Action[] => {
       shortcut: ["h"],
       keywords: "back",
       section: "Navigation",
-      // perform: () => history.push("/"),
+      perform: () => router.push("/"),
       icon: <HomeIcon />,
       subtitle: "Subtitles can help add more context.",
+    },
+    {
+      id: "backAction",
+      name: "Back",
+      shortcut: ["b"],
+      keywords: "go back last page",
+      section: "Navigation",
+      perform: () => router.back(),
+      icon: <ArrowLeftIcon />,
     },
     {
       id: "contactAction",
       name: "Contact",
       shortcut: ["c"],
       keywords: "email hello",
-      section: "Navigation",
+      section: "Social",
       icon: <CrumpledPaperIcon />,
       perform: () => window.open("mailto:hello@preetjdp.dev", "_blank"),
     },
@@ -181,9 +195,10 @@ const ResultItem = React.forwardRef(
 
 const CommandBar = (props: CommandBarProps) => {
   const { setTheme } = useTheme();
+  const router = useRouter();
 
   return (
-    <KBarProvider actions={actions(setTheme)}>
+    <KBarProvider actions={actions(setTheme, router)}>
       <KBarPortal>
         <KBarPositioner>
           <KBarAnimator className="max-w-xl w-full bg-gray-50 rounded-lg shadow-3xl overflow-hidden dark:bg-gray-custom-1">
@@ -210,7 +225,11 @@ export const CommandBarToggle = () => {
 
   return (
     <Tooltip delayDuration={0}>
-      <TooltipTrigger asChild onClick={() => query.toggle()}>
+      <TooltipTrigger
+        className="appearance-none"
+        asChild
+        onClick={() => query.toggle()}
+      >
         <div className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700">
           <Command className="text-gray-custom-1 dark:text-white" />
         </div>
