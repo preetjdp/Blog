@@ -48,11 +48,9 @@ export default function Home(
         <Header />
         <Aside />
         <Main>
-          {props.posts && props.posts.length > 0
-            ? props.posts.map((post) => (
-                <Article key={post.slug} {...post.frontMatter} />
-              ))
-            : null}
+          {props.posts.map((post) => (
+            <Article key={post.slug} {...post.frontMatter} />
+          ))}
         </Main>
         <Footer />
       </Container>
