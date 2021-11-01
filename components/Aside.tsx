@@ -29,7 +29,7 @@ const Aside = () => {
             "linear-gradient(319deg, rgb(251, 241, 253) 17%, rgba(255, 255, 255, 0) 58%), linear-gradient(34deg, rgb(236, 242, 180) 27%, rgba(255, 255, 255, 0) 71%), radial-gradient(at 2% 188%, rgb(241, 229, 106) 8%, rgba(255, 255, 255, 0) 80%), radial-gradient(at -46% -19%, rgb(29, 122, 79) 35%, rgba(255, 255, 255, 0) 62%), linear-gradient(212deg, rgb(239, 182, 52) 21%, rgba(255, 255, 255, 0) 53%), linear-gradient(328deg, rgb(155, 155, 155) 18%, rgba(255, 255, 255, 0) 60%);",
         }}
       >
-        <div className=" rounded-full">
+        <div className="rounded-full self-start mt-2 sm:self-center sm:mt-0">
           <Image
             src={Preet}
             alt="Al Joseph Condino"
