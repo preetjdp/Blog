@@ -211,7 +211,7 @@ const CommandBar = (props: CommandBarProps) => {
               placeholder="Search the Blog ..."
               className="px-4 py-4 text-xl w-full box-border outline-none border-none bg-gray-50 font-mono dark:bg-gray-custom-1"
             />
-            <div className="pb-2">
+            <div className="pb-4">
               <RenderResults />
             </div>
           </KBarAnimator>
