@@ -208,7 +208,7 @@ const CommandBar = (props: CommandBarProps) => {
         <KBarPositioner>
           <KBarAnimator className="max-w-xl w-full bg-gray-50 rounded-lg shadow-3xl overflow-hidden dark:bg-gray-custom-1">
             <KBarSearch
-              placeholder="Search the Blog ..."
+              placeholder="Search the Website ..."
               className="px-4 py-4 text-xl w-full box-border outline-none border-none bg-gray-50 font-mono dark:bg-gray-custom-1"
             />
             <div className="pb-4">
