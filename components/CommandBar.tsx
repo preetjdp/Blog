@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   KBarProvider,
@@ -36,7 +36,7 @@ const actions = (
   toggleTheme: (theme: string) => void,
   router: NextRouter
 ): Action[] => {
-  return [
+  const actions = [
     {
       id: "homeAction",
       name: "Home",
@@ -46,15 +46,6 @@ const actions = (
       perform: () => router.push("/"),
       icon: <HomeIcon />,
       // subtitle: "Subtitles can help add more context.",
-    },
-    {
-      id: "backAction",
-      name: "Back",
-      shortcut: ["b"],
-      keywords: "go back last page",
-      section: "Navigation",
-      perform: () => router.back(),
-      icon: <ArrowLeftIcon />,
     },
     {
       id: "contactAction",
@@ -110,6 +101,20 @@ const actions = (
       parent: "theme",
     },
   ];
+
+  if (router.pathname !== "/") {
+    actions.push({
+      id: "backAction",
+      name: "Back",
+      shortcut: ["b"],
+      keywords: "go back last page",
+      section: "Navigation",
+      perform: () => router.back(),
+      icon: <ArrowLeftIcon />,
+    });
+  }
+
+  return actions;
 };
 
 /**
