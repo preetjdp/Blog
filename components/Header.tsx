@@ -1,17 +1,18 @@
 import React from "react";
 
-import Image from "next/image";
-import Logo from "./Logo";
-import Toggle from "./Toggle";
-import { useTheme } from "next-themes";
+import Logo from "@/components/Logo";
+import { CommandBarToggle } from "./CommandBar";
 
+/**
+ * The header component
+ *
+ * @returns JSX.Element
+ */
 const Header = () => {
-  const { setTheme, theme } = useTheme();
-
   return (
     <header className="flex justify-between items-center mb-10">
       <Logo />
-      {theme === undefined ? null : <Toggle />}
+      <CommandBarToggle />
     </header>
   );
 };
