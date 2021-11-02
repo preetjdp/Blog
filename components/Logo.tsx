@@ -3,6 +3,11 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+/**
+ * The Logo component
+ *
+ * @returns JSX.Element
+ */
 const Logo = () => {
   const router = useRouter();
   const isIndex = router.pathname === "/";

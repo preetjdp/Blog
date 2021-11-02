@@ -1,27 +1,13 @@
 import React from "react";
 
-// import Logo from "./Logo";
 import Image from "next/image";
-import { useRouter } from "next/router";
-// import Signup from "./Signup";
 
-import Preet from "../public/assets/preet.jpg";
-import { SimpleTooltip } from "./Tooltip";
+import PreetImage from "../public/assets/preet.jpg";
+import { SimpleTooltip } from "@/components/Tooltip";
 
 const Aside = () => {
-  const router = useRouter();
-  // const isIndex = router.pathname === "/";
-
   return (
     <aside>
-      {/* {!isIndex && (
-        <>
-          <Signup />
-          <div className="mb-7">
-            <Logo />
-          </div>
-        </>
-      )} */}
       <div
         className="flex mb-12 items-center text-base py-16 px-5"
         style={{
@@ -31,8 +17,8 @@ const Aside = () => {
       >
         <div className="rounded-full self-start mt-2 sm:self-center sm:mt-0">
           <Image
-            src={Preet}
-            alt="Al Joseph Condino"
+            src={PreetImage}
+            alt="Preet Parekh"
             width={48}
             height={48}
             className=" rounded-full"

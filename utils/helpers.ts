@@ -16,6 +16,12 @@ export function formatPostDate(date) {
   return format(new Date(date), "MMM d, y");
 }
 
+/**
+ * Allows classNames to be joined
+ *
+ * @param classes The classes to be joined
+ * @returns string The joined css query
+ */
 export function classNames(...classes: Array<string>) {
   return classes.filter(Boolean).join(" ");
 }

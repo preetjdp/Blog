@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 
+import { NextRouter, useRouter } from "next/router";
+import { useTheme } from "next-themes";
 import {
   KBarProvider,
   KBarPortal,
@@ -12,11 +14,6 @@ import {
   useKBar,
   createAction,
 } from "kbar";
-import { classNames } from "@/utils/helpers";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
-
-import { Command } from "react-feather";
-
 import {
   TwitterLogoIcon,
   HomeIcon,
@@ -25,8 +22,10 @@ import {
   LightningBoltIcon,
   ArrowLeftIcon,
 } from "@radix-ui/react-icons";
-import { useTheme } from "next-themes";
-import { NextRouter, useRouter } from "next/router";
+import { Command } from "react-feather";
+
+import { classNames } from "@/utils/helpers";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/Tooltip";
 
 interface CommandBarProps {
   children: React.ReactNode;
@@ -45,7 +44,6 @@ const actions = (
       section: "Navigation",
       perform: () => router.push("/"),
       icon: <HomeIcon />,
-      // subtitle: "Subtitles can help add more context.",
     },
     {
       id: "contactAction",
@@ -198,6 +196,12 @@ const ResultItem = React.forwardRef(
   }
 );
 
+/**
+ * The command bar component
+ *
+ * @param props The command-bar props
+ * @returns JSX.Element
+ */
 const CommandBar = (props: CommandBarProps) => {
   const { setTheme } = useTheme();
   const router = useRouter();
@@ -224,6 +228,8 @@ const CommandBar = (props: CommandBarProps) => {
 
 /**
  * The command bar toggle
+ *
+ * @returns JSX.Element
  */
 export const CommandBarToggle = () => {
   const { query } = useKBar();

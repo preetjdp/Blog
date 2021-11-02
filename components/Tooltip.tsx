@@ -1,7 +1,6 @@
 import React from "react";
+
 import { styled, keyframes } from "@stitches/react";
-import { PlusIcon } from "@radix-ui/react-icons";
-import { violet, blackA } from "@radix-ui/colors";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
 const slideUpAndFade = keyframes({
@@ -29,9 +28,7 @@ const StyledContent = styled(TooltipPrimitive.Content, {
   padding: "10px 15px",
   fontSize: 15,
   lineHeight: 1,
-  //   color: violet.violet11,
   fontFamily: "sans-serif",
-  // backgroundColor: "bg-gray-custom-1",
   boxShadow:
     "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
   "@media (prefers-reduced-motion: no-preference)": {
@@ -65,6 +62,12 @@ interface TextTooltipProps {
   asChild?: boolean;
 }
 
+/**
+ * The simple tooltip, that can be used for text tooltips
+ *
+ * @param props The props for the SimpleTooltip
+ * @returns JSX.Element
+ */
 export const SimpleTooltip = (props: TextTooltipProps) => {
   return (
     <Tooltip delayDuration={0}>
@@ -79,7 +82,6 @@ export const SimpleTooltip = (props: TextTooltipProps) => {
         className="bg-gray-100 dark:bg-gray-custom-1 border-1 border-solid border-black dark:border-white"
         sideOffset={0}
       >
-        {/* {typeof props.tooltip === "string" ? props.tooltip : props.tooltip} */}
         {props.tooltip}
       </TooltipContent>
     </Tooltip>

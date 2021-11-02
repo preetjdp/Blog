@@ -1,5 +1,10 @@
 import React from "react";
 
+/**
+ * The Footer Component
+ *
+ * @returns JSX.Element
+ */
 const Footer = () => {
   return (
     <footer className="mt-18 pt-7 text-base flex justify-between">

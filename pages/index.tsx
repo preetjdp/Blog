@@ -1,5 +1,6 @@
 import React from "react";
 
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 
 import Container from "@/components/Container";
@@ -8,7 +9,7 @@ import Aside from "@/components/Aside";
 import Main from "@/components/Main";
 import Article from "@/components/Article";
 import Footer from "@/components/Footer";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+
 import { getAllPosts } from "@/utils/api";
 import { InternalPost } from "@/utils/types";
 import { generateRSS } from "@/utils/rss";
@@ -62,7 +63,7 @@ interface Props {
   posts: Array<InternalPost>;
 }
 
-export const getStaticProps: GetStaticProps<Props> = async (context) => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   await generateRSS();
 
   const posts = await getAllPosts();
