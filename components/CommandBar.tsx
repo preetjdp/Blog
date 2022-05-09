@@ -26,6 +26,7 @@ import { Command } from "react-feather";
 
 import { classNames } from "@/utils/helpers";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/Tooltip";
+import { DevfolioLogoIcon } from "./DevfolioIcon";
 
 interface CommandBarProps {
   children: React.ReactNode;
@@ -52,7 +53,7 @@ const actions = (
       keywords: "email hello",
       section: "Social",
       icon: <CrumpledPaperIcon />,
-      perform: () => window.open("mailto:hello@preetjdp.dev", "_blank"),
+      perform: () => window.open("mailto:hello@pre.et", "_blank"),
     },
     {
       id: "twitterAction",
@@ -71,6 +72,15 @@ const actions = (
       icon: <GitHubLogoIcon />,
       perform: () => window.open("https://github.com/preetjdp", "_blank"),
     }),
+    {
+      id: "devfolioAction",
+      name: "Devfolio",
+      shortcut: ["dev"],
+      keywords: "devfolio",
+      section: "Social",
+      icon: <DevfolioLogoIcon />,
+      perform: () => window.open("https://devfolio.co/@preetjdp", "_blank"),
+    },
     {
       id: "theme",
       name: "Change Theme",
