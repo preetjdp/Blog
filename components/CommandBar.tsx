@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { NextRouter, useRouter } from "next/router";
 import { useTheme } from "next-themes";
@@ -13,6 +13,8 @@ import {
   Action,
   useKBar,
   createAction,
+  ActionId,
+  ActionImpl,
 } from "kbar";
 import {
   TwitterLogoIcon,
@@ -21,6 +23,7 @@ import {
   CrumpledPaperIcon,
   LightningBoltIcon,
   ArrowLeftIcon,
+  TimerIcon,
 } from "@radix-ui/react-icons";
 import { Command } from "react-feather";
 
@@ -36,7 +39,7 @@ const actions = (
   toggleTheme: (theme: string) => void,
   router: NextRouter
 ): Action[] => {
-  const actions = [
+  const actions: Action[] = [
     {
       id: "homeAction",
       name: "Home",
@@ -45,6 +48,15 @@ const actions = (
       section: "Navigation",
       perform: () => router.push("/"),
       icon: <HomeIcon />,
+    },
+    {
+      id: "nowAction",
+      name: "Now",
+      shortcut: ["n"],
+      keywords: "now",
+      section: "Navigation",
+      perform: () => router.push("/now"),
+      icon: <TimerIcon />,
     },
     {
       id: "contactAction",
@@ -75,7 +87,7 @@ const actions = (
     {
       id: "devfolioAction",
       name: "Devfolio",
-      shortcut: ["dev"],
+      shortcut: ["d", "e", "v"],
       keywords: "devfolio",
       section: "Social",
       icon: <DevfolioLogoIcon />,
@@ -88,7 +100,6 @@ const actions = (
       keywords: "interface color dark light",
       section: "Preferences",
       icon: <LightningBoltIcon />,
-      children: ["darkTheme", "lightTheme"],
     },
     {
       id: "darkTheme",
@@ -130,21 +141,12 @@ const actions = (
  *
  * @returns JSX.Element
  */
-const RenderResults = () => {
-  const groups = useMatches();
-  const flattened = React.useMemo(
-    () =>
-      groups.reduce((acc, curr) => {
-        acc.push(curr.name);
-        acc.push(...curr.actions);
-        return acc;
-      }, []),
-    [groups]
-  );
+function RenderResults() {
+  const { results, rootActionId } = useMatches();
 
   return (
     <KBarResults
-      items={flattened.filter((i) => i !== "none")}
+      items={results}
       onRender={({ item, active }) => (
         <div className="px-4">
           {typeof item === "string" ? (
@@ -152,13 +154,17 @@ const RenderResults = () => {
               {item}
             </div>
           ) : (
-            <ResultItem action={item} active={active} />
+            <ResultItem
+              action={item}
+              active={active}
+              currentRootActionId={rootActionId}
+            />
           )}
         </div>
       )}
     />
   );
-};
+}
 
 // eslint-disable-next-line react/display-name
 const ResultItem = React.forwardRef(
@@ -166,12 +172,26 @@ const ResultItem = React.forwardRef(
     {
       action,
       active,
+      currentRootActionId,
     }: {
-      action: Action;
+      action: ActionImpl;
       active: boolean;
+      currentRootActionId: ActionId;
     },
     ref: React.Ref<HTMLDivElement>
   ) => {
+    const ancestors = React.useMemo(() => {
+      if (!currentRootActionId) return action.ancestors;
+      const index = action.ancestors.findIndex(
+        (ancestor) => ancestor.id === currentRootActionId
+      );
+      // +1 removes the currentRootAction; e.g.
+      // if we are on the "Set theme" parent action,
+      // the UI should not display "Set theme… > Dark"
+      // but rather just "Dark"
+      return action.ancestors.slice(index + 1);
+    }, [action.ancestors, currentRootActionId]);
+
     return (
       <div
         ref={ref}
@@ -217,12 +237,15 @@ const CommandBar = (props: CommandBarProps) => {
   const router = useRouter();
 
   return (
-    <KBarProvider actions={actions(setTheme, router)}>
+    <KBarProvider
+      actions={actions(setTheme, router)}
+      options={{ enableHistory: true }}
+    >
       <KBarPortal>
         <KBarPositioner>
           <KBarAnimator className="max-w-xl w-full bg-gray-50 rounded-lg shadow-3xl overflow-hidden dark:bg-gray-custom-1">
             <KBarSearch
-              placeholder="Search the Website ..."
+              placeholder="Search through Preet"
               className="px-4 py-4 text-xl w-full box-border outline-none border-none bg-gray-50 font-mono dark:bg-gray-custom-1"
             />
             <div className="pb-4">
