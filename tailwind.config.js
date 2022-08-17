@@ -62,8 +62,8 @@ module.exports = {
         },
       }),
       fontFamily: {
-        sans: ["montserrat"],
-        serif: ["charter"],
+        sans: ["montserrat", "-apple-system"],
+        serif: ["charter", "-apple-system"],
         default: ["system-ui"],
         mono: ["monospace"],
         system: ["system-ui"],
