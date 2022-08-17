@@ -62,14 +62,33 @@ module.exports = {
         },
       }),
       fontFamily: {
-        sans: ["montserrat"],
-        serif: ["charter"],
+        sans: ["montserrat", "-apple-system"],
+        serif: ["charter", "-apple-system"],
         default: ["system-ui"],
         mono: ["monospace"],
         system: ["system-ui"],
       },
       boxShadow: {
         "3xl": "0 0px 60px -15px rgba(0, 0, 0, 0.3)",
+      },
+      keyframes: {
+        gradient: {
+          "0%": {
+            "background-position": "0% 0%",
+            "background-size": "100% 100%",
+          },
+          "50%": {
+            "background-position": "100% 50%",
+            "background-size": "300% 300%",
+          },
+          "100%": {
+            "background-position": "0% 0%",
+            "background-size": "100% 100%",
+          },
+        },
+      },
+      animation: {
+        gradient: "gradient 15s ease infinite",
       },
     },
     // fontFamily: {
