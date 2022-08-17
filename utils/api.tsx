@@ -72,6 +72,38 @@ const getLocalMDXPosts = async (): Promise<Array<InternalPost>> => {
   return result;
 };
 
+/**
+ * This function is used to fetch all the locally written MDX posts
+ */
+const getNow = async (): Promise<MDXRemoteSerializeResult<any>> => {
+  const filePath = join(process.cwd(), "pages", "now.mdx");
+  const file = fs.readFileSync(filePath);
+
+  const { data, content } = matter(file);
+  const mdxSource = (await serialize(content, {
+    //@ts-expect-error Ignore
+    components: MDXComponents,
+    scope: data,
+    mdxOptions: {
+      remarkPlugins: [
+        remarkSlug,
+        [
+          remarkAutolinkHeadings,
+          {
+            linkProperties: {
+              className: ["anchor", "shadow-none"],
+            },
+          },
+        ],
+        remarkCodeTitles,
+      ],
+      rehypePlugins: [mdxPrism],
+    },
+  })) as unknown as MDXRemoteSerializeResult<InternalPostMeta>;
+
+  return mdxSource;
+};
+
 const getGithubMDXPosts = async (): Promise<Array<InternalPost>> => {
   const QUERY = gql`
     query getGithubIssues {
@@ -205,4 +237,4 @@ export const getPagination = async (pageSlug: string) => {
   };
 };
 
-export { getAllPosts };
+export { getAllPosts, getNow };

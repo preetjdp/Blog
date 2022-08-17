@@ -8,7 +8,7 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className="mt-18 pt-7 text-base flex justify-between">
-      <div>
+      {/* <div>
         <a
           className="text-pink-700 dark:text-pink-300 shadow-link hover:shadow-none"
           href="https://twitter.com/TmPreet"
@@ -24,7 +24,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          github
+          gh
         </a>{" "}
         &bull;{" "}
         <a
@@ -34,8 +34,17 @@ const Footer = () => {
           rel="noopener noreferrer"
         >
           resume
-        </a>
-      </div>
+        </a>{" "}
+        &bull;{" "}
+        <a
+          className="text-pink-700 dark:text-pink-300 shadow-link hover:shadow-none"
+          href="https://devfolio.co/@preetjdp"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          devfolio
+        </a>{" "}
+      </div> */}
       <div>
         <a
           className="text-pink-700 dark:text-pink-300 shadow-link hover:shadow-none justify-self-end"

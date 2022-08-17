@@ -15,9 +15,13 @@ import MDXComponents from "@/components/MDXComponents";
 
 import { getPostBySlug, getPagination, getAllPosts } from "@/utils/api";
 // import { getTweets } from '@/utils/twitter';
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 
-export default function Post({ post, tweets, pagination }) {
+export default function Post({
+  post,
+  tweets,
+  pagination,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
   const canonicalUrl = `https://preetjdp.dev${router.asPath}`;
   const GITHUB_USERNAME = "preetjdp";
