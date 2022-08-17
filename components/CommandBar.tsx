@@ -24,6 +24,7 @@ import {
   LightningBoltIcon,
   ArrowLeftIcon,
   TimerIcon,
+  GlobeIcon,
 } from "@radix-ui/react-icons";
 import { Command } from "react-feather";
 
@@ -57,6 +58,14 @@ const actions = (
       section: "Navigation",
       perform: () => router.push("/now"),
       icon: <TimerIcon />,
+    },
+    {
+      id: "treasureIcon",
+      name: "Treasure",
+      keywords: "treasure",
+      section: "Navigation",
+      icon: <GlobeIcon />,
+      perform: () => window.open("https://treasure.preetjdp.dev", "_blank"),
     },
     {
       id: "contactAction",
