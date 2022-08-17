@@ -144,25 +144,31 @@ const actions = (
 function RenderResults() {
   const { results, rootActionId } = useMatches();
 
+  if (results.length === 0) {
+    return <></>;
+  }
+
   return (
-    <KBarResults
-      items={results}
-      onRender={({ item, active }) => (
-        <div className="px-4">
-          {typeof item === "string" ? (
-            <div className="py-4 text-xs uppercase opacity-50 font-mono">
-              {item}
-            </div>
-          ) : (
-            <ResultItem
-              action={item}
-              active={active}
-              currentRootActionId={rootActionId}
-            />
-          )}
-        </div>
-      )}
-    />
+    <div className="pb-4">
+      <KBarResults
+        items={results}
+        onRender={({ item, active }) => (
+          <div className="px-4">
+            {typeof item === "string" ? (
+              <div className="py-4 text-xs uppercase opacity-50 font-mono">
+                {item}
+              </div>
+            ) : (
+              <ResultItem
+                action={item}
+                active={active}
+                currentRootActionId={rootActionId}
+              />
+            )}
+          </div>
+        )}
+      />
+    </div>
   );
 }
 
@@ -242,15 +248,13 @@ const CommandBar = (props: CommandBarProps) => {
       options={{ enableHistory: true }}
     >
       <KBarPortal>
-        <KBarPositioner>
-          <KBarAnimator className="max-w-xl w-full bg-gray-50 rounded-lg shadow-3xl overflow-hidden dark:bg-gray-custom-1">
+        <KBarPositioner className="items-end p-0 md:items-center">
+          <KBarAnimator className="max-w-xl w-full bg-gray-50 rounded-lg shadow-3xl overflow-hidden dark:bg-gray-custom-1 lg:m-12">
             <KBarSearch
               placeholder="Search through Preet"
               className="px-4 py-4 text-xl w-full box-border outline-none border-none bg-gray-50 font-mono dark:bg-gray-custom-1"
             />
-            <div className="pb-4">
-              <RenderResults />
-            </div>
+            <RenderResults />
           </KBarAnimator>
         </KBarPositioner>
       </KBarPortal>
